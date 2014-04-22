@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "io.fresk.iowaculture"
+    versionCode = "10" 
+    version     = "1.0.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>IowaCulture</name>
+
+    <description>
+        Highlighting Iowa's culture. 
+    </description>
+
+    <author href="https://fresklabs.com" email="support@fresklabs.com">
+        FRESK, LLC 
+    </author>
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+
+
+    <access origin="*"/> 
+    <preference name="orientation"                value="portrait" />       <!-- all: default means both landscape and portrait are enabled -->
+    <preference name="target-device"              value="handset" />      <!-- all: possible values handset, tablet, or universal -->
+    <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
+    <preference name="ios-statusbarstyle"         value="black-opaque" />   <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
+    <preference name="DisallowOverscroll" value="true"/>
+
+    <!-- Define app icon for each platform. -->
+    <icon src="icon.png" />
+
+    <gap:plugin name="com.phonegap.plugin.statusbar" />
+
+</widget>

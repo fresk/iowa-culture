@@ -1,0 +1,26 @@
+<div class="explore-screen" v-transition>
+
+  <header class="bar bar-nav">
+    <a href="#/back" class="icon icon-left-nav pull-left"></a>
+    <a href="#/search" class="icon icon-search pull-right"></a>
+    <a href="#/home" class="header-logo"></a>
+  </header>
+
+  <nav class="bar bar-tab">
+    <a href="#/help" >
+      <div class="help"></div>
+    </a>
+  </nav>
+
+  <div class="content">
+
+    <ul class="table-view">
+      <li v-repeat="locations" class="table-view-cell">
+      <a class="navigate-right" href="#/location/{{_id}}">
+        {{title}}
+      </a>
+      </li>
+    </ul>
+
+  </div>
+</div>

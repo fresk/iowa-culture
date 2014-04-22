@@ -1,0 +1,56 @@
+<div class="explore-screen" v-transition>
+
+  <header class="bar bar-nav">
+    <a href="#/back" class="icon icon-left-nav pull-left"></a>
+    <a href="#/search" class="icon icon-search pull-right"></a>
+    <a href="#/home" class="header-logo"></a>
+  </header>
+
+  <nav class="bar bar-tab">
+    <a href="#/explore/locate" class="locate-btn"></a>
+  </nav>
+
+  <div class="content">
+
+    <ul class="table-view">
+
+
+      <li class="table-view-divider" v-on="click: groups.art = !groups.art" >
+        Art 
+        <a class="glyphicons icon {{isSelectAll('art')}}" v-on="click: toggleSelectAll('art', $event)" ></a>
+      </li>
+      <li class="table-view-cell {{groups.art ? '' : 'hide'}} " 
+          v-on="click: toggle($value)" 
+          v-repeat="categories.art" >
+        {{categories.displayNames[$value]}}
+        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+      </li>
+
+      <li class="table-view-divider" v-on="click: groups.history = !groups.history" >
+        History 
+        <a class="glyphicons icon {{isSelectAll('history')}}" v-on="click: toggleSelectAll('history', $event)" ></a>
+      </li>
+      <li class="table-view-cell {{groups.history ? '' : 'hide'}} " 
+          v-on="click: toggle($value)" 
+          v-repeat="categories.history" >
+        {{categories.displayNames[$value]}}
+        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+      </li>     
+     
+
+      <li class="table-view-divider" v-on="click: groups.science = !groups.science" >
+        Science and Nature 
+        <a class="glyphicons icon {{isSelectAll('science')}}" v-on="click: toggleSelectAll('science', $event)" ></a>
+      </li>
+      <li class="table-view-cell {{groups.science ? '' : 'hide'}} " 
+          v-on="click: toggle($value)" 
+          v-repeat="categories.science" >
+        {{categories.displayNames[$value]}}
+        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+      </li>     
+
+
+    </ul>
+
+  </div>
+</div>

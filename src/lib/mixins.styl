@@ -1,0 +1,42 @@
+@require 'nib'
+
+retina-path(path)
+  ext = extname(path)
+  return pathjoin(dirname(path), basename(path, ext) + '@2x' + ext)
+  
+
+bg-img(path, min_pixel_ratio = 1.5)
+  //set background image and background size based on image
+  background-image: url(path)
+  background-size: image-size(path)
+  
+  // media query for retina displays
+  mq = 'all and (-webkit-min-device-pixel-ratio:' + min_pixel_ratio + '),'
+  mq = mq + '(min--moz-device-pixel-ratio:' + min_pixel_ratio + '),'
+  mq = mq + '(-o-min-device-pixel-ratio:' + min_pixel_ratio + '/1),'
+  mq = mq + '(min-device-pixel-ratio:' + min_pixel_ratio + '),'
+  mq = mq + '(min-resolution:' + unit(min_pixel_ratio*92, dpi) + '),'
+  mq = mq + '(min-resolution:' + unit(min_pixel_ratio, dppx) + ')'
+
+  // use 2x image on retina displays
+  @media mq
+    background-image: url( retina-path(path) )
+
+
+img(path)
+  display: block
+  bg-img(path)
+  size: image-size(path)
+
+img-btn(path)
+  display: inline-block
+  bg-img(path)
+  size: image-size(path)
+
+center-vertical()
+  relative: top 50%
+  transform: translateY(-50%)
+
+center-both()
+  center-vertical()
+  margin: auto

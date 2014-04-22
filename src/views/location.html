@@ -1,0 +1,45 @@
+<div class="location-screen" v-transition>
+
+  <header class="bar bar-nav">
+    <a href="#/back" class="glyphicons white chevron-left  pull-left"></a>
+    <a href="#/search" class="glyphicons white search pull-right"></a>
+    <a href="#/home" class="header-logo"></a>   
+  </header>
+
+  <nav class="bar bar-standard bar-footer">
+    <a class="glyphicons white dislikes pull-left"></a>
+    <a class="glyphicons white direction pull-right"></a>
+  </nav>
+
+  <div class="content">
+
+    <div class="images">
+      <img v-attr="src: context.images[0].url" alt="">
+    </div>
+    <div class="info">
+
+      <h1>{{context.title}}</h1>
+
+      <p>
+      {{context.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "}}
+      </p> 
+
+
+    <div class="info-box">
+      <span class="glyphicons google_maps pull-left"></span>
+      <address>
+        {{context.title}}<br/>
+        {{context.address1}}<br/>
+        {{context.city}}, {{context.state}} {{context.zip}}<br/>
+      </address>
+    </div>
+
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
