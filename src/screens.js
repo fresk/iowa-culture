@@ -136,9 +136,8 @@ function initMapView(places){
  			var m = new L.Marker(latlng, {
  					title: item.title
  			});
- 			markers.addLayer(m);
+ 			m.addTo(map);
  	})
-	map.addLayer(markers);
 
 
     var userMarker = null;
