@@ -1,13 +1,22 @@
 
 var _= require('lodash');
-var mapbox = require('mapbox.js'); //attaches to window.L
+require('./lib/leaflet/leaflet'); //attaches to window.L
+require('./lib/leaflet/bouncemarker'); //attaches to window.L
+require('./lib/leaflet/leaflet.restoreview'); //attaches to window.L
+require('./lib/leaflet/leaflet.usermarker'); //attaches to window.L
+
+L.Icon.Default.imagePath = "./lib/leaflet/images"
 
 
+
+
+// HOME /////////////////////////////////////////////////
 exports.HomeScreen = {
   template: require('./views/home.html')
 };
 
 
+// EXPLORE /////////////////////////////////////////////////
 exports.ExploreScreen = {
   template: require('./views/explore.html'),
 
@@ -42,15 +51,7 @@ exports.ExploreScreen = {
     },
 
     toggleSelectAll: function(group, ev){
-
-      console.log("DDDD", this.groupSelectAll[group] )
-
       this.groupSelectAll[group] = ! this.groupSelectAll[group] ;
-
-
-      console.log("XXX", this.groupSelectAll[group]);
-
-      console.log("AAA", app.categories);
       if (this.groupSelectAll[group] ){
         _.forEach(app.categories[group], function(c){
           this.selected.$add(c, true);
@@ -61,42 +62,143 @@ exports.ExploreScreen = {
           this.selected.$delete(c);
         }, this)
       }
-
       ev.stopPropagation();
       return true;
-
     },
-
-
   }
+};
 
+
+// LOCATION LIST /////////////////////////////////////////////////
+exports.LocationListScreen = {
+  template: require('./views/location_list.html'),
+  data:{
+    listData: []
+  }
+};
+
+
+// LOCATION DETAIL /////////////////////////////////////////////////
+exports.LocationScreen = {
+  template: require('./views/location.html')
+};
+
+
+// MAP /////////////////////////////////////////////////
+exports.MapScreen = {
+  template: require('./views/map.html'),
+
+  data:{
+    listData: []
+  },
+
+
+  ready: function(){
+    items = _.sample(this.listData, 100);
+    setTimeout(function(){
+      initMapView(items);
+    }, 100);
+  }
 
 };
 
-  exports.LocationListScreen = {
-    template: require('./views/location_list.html')
-  };
 
 
-  exports.LocationScreen = {
-    template: require('./views/location.html')
-  };
+function locationMarker(loc){
+	return new L.Marker([loc.loc.coordinates[1], loc.loc.coordinates[0]], {
+		title: loc.title,
+		icon: "home",
+		markerColor: "orange",
+		alt: loc.title,
+		bounceOnAdd: true,
+
+	});
+
+}
 
 
-  exports.MapScreen = {
-    template: require('./views/map.html'),
+function initMapView(places){
 
-    ready: function(){
-      setTimeout(initMapView, 100);
+  var map = L.map('map');
+
+  var mapboxid = 'https://{s}.tiles.mapbox.com/v3/hansent.i1256a9l/{z}/{x}/{y}.png';
+  var mapboxTiles = L.tileLayer(mapboxid).addTo(map);
+
+
+	//var markers = new L.MarkerClusterGroup({
+	//	maxClusterRadius: 20,
+    //
+	//});
+    //
+    //
+ 	_.forEach(app.locations, function(item){
+ 			var latlng = L.latLng(item.loc.coordinates[1], item.loc.coordinates[0]);
+ 			var m = new L.Marker(latlng, {
+ 					title: item.title
+ 			});
+ 			markers.addLayer(m);
+ 	})
+	map.addLayer(markers);
+
+
+    var userMarker = null;
+    map.on("locationfound", function(location) {
+        if (!userMarker){
+    	    var opts = {pulsing:true, accuracy:100, smallIcon:true};
+            userMarker = L.userMarker(location.latlng, opts).addTo(map);
+        }
+        userMarker.setLatLng(location.latlng);
+        userMarker.setAccuracy(location.accuracy);
+    });
+
+
+ 	map.locate({
+	    locate: true,
+	    setView: false,
+	    enableHighAccuracy: true
+	});
+	//if (!map.restoreView()){
+  	map.setView([41.5, -93.5], 6);
+	//}
+
+}
+
+
+
+
+function makeMyLocationMarker(latlng){
+  return {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [latlng.lng, latlng.lat]
+    },
+    properties: {
+      title: "Your Location",
+      'marker-color': '#00f',
+      'marker-symbol': 'star-stroked'
     }
-
-  };
-
-  function initMapView(){
-    L.mapbox.map('map', 'hansent.i1256a9l', {
-      tileLayer: {detectRetina: true},
-      zoomControl: false,
-      attributionControl: false,
-      updateWhenIdle:false
-    })
   }
+
+
+}
+
+
+function locationsGeoJSON(places) {
+  return  _.map(places, function(place){
+    return {
+      type: 'Feature',
+          geometry: place.loc,
+          properties: {
+            'title': place.title,
+          'url': '#/location/'+place._id,
+          'marker-symbol': 'museum',
+          'marker-color': "#f00"
+          },
+    }
+  });
+
+}
+
+
+

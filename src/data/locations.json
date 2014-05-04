@@ -10046,52 +10046,6 @@
     ]
   },
   {
-    "title": "A Social History of Des Moines",
-    "email": "",
-    "phone": "",
-    "website": "http://www.worldfoodprize.org/index.cfm?nodeID=37219&audienceID=1",
-    "address1": "301-399Library Avenue",
-    "address2": "",
-    "city": "Des Moines",
-    "state": "",
-    "zip": "50309",
-    "county": "Polk",
-    "facebook": "",
-    "twitter": "",
-    "youtube": "",
-    "instagram": "",
-    "public": "true",
-    "featured": "false",
-    "featured_text": "",
-    "_id": "52ffb7e7df2d9fc64b0002d3",
-    "__v": 0,
-    "loc": {
-      "type": "Point",
-      "coordinates": [
-        -93.6189222335815,
-        41.587771676692
-      ]
-    },
-    "images": [
-      {
-        "url": "http://dsmpublicartfoundation.org/paf/wp-content/uploads/2011/10/Jones_Harry-Donald_A-Social-History-of-DSM_dmpl_Mural_9.jpg",
-        "_id": "530be4015685be1cdc000154"
-      },
-      {
-        "url": "http://dsmpublicartfoundation.org/paf/wp-content/uploads/2011/10/Jones_Harry-Donald-detail-A-Social-History-of-DSM_mural.jpg",
-        "_id": "530be4015685be1cdc000153"
-      }
-    ],
-    "tags": [
-      "Mural",
-      "Site-specific",
-      "Fresco"
-    ],
-    "categories": [
-      "art"
-    ]
-  },
-  {
     "title": "Family at Corner",
     "email": "",
     "phone": "",
@@ -27543,6 +27497,53 @@
     ],
     "categories": [
       "museum"
+    ]
+  },
+  {
+    "__v": 0,
+    "_id": "52ffb7e7df2d9fc64b0002d3",
+    "address1": "301-399Library Avenue",
+    "address2": "",
+    "city": "Des Moines",
+    "county": "Polk",
+    "email": "",
+    "facebook": "",
+    "featured": "false",
+    "featured_text": "",
+    "instagram": "",
+    "phone": "",
+    "public": "true",
+    "state": "",
+    "title": "A Social History of Des Moines",
+    "twitter": "",
+    "website": "http://www.worldfoodprize.org/index.cfm?nodeID=37219&audienceID=1",
+    "youtube": "",
+    "zip": "50309",
+    "loc": {
+      "type": "Point",
+      "coordinates": [
+        -93.6189222335815,
+        41.587771676692
+      ]
+    },
+    "images": [
+      {
+        "url": "http://dsmpublicartfoundation.org/paf/wp-content/uploads/2011/10/Jones_Harry-Donald_A-Social-History-of-DSM_dmpl_Mural_9.jpg",
+        "_id": "530be4015685be1cdc000154"
+      },
+      {
+        "url": "http://dsmpublicartfoundation.org/paf/wp-content/uploads/2011/10/Jones_Harry-Donald-detail-A-Social-History-of-DSM_mural.jpg",
+        "_id": "530be4015685be1cdc000153"
+      }
+    ],
+    "tags": [
+      "Mural",
+      "Site-specific",
+      "Fresco"
+    ],
+    "categories": [
+      "art",
+      "art_museum"
     ]
   }
 ]
