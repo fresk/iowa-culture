@@ -19,7 +19,6 @@ module.exports = Vue.extend({
   created: function(){
     this.$router = new director.Router(this.$options.routes);
     this.$router.app = this;
-    this.$router.init("/home");
 
     this.$data.rootView = null;
     this.$data.rootContext = null;
