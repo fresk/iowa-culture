@@ -157,6 +157,7 @@ function initMapView(places){
         var m = new L.Marker(latlng, {
             title: item.title
         });
+        m.bindPopup('<a href="#/location/'+item._id+'" >'+item.title+'</a>')
         m.addTo(map);
     })
 
@@ -172,13 +173,14 @@ function initMapView(places){
     });
 
 
-    map.locate({
-        locate: true,
-        setView: false,
-        enableHighAccuracy: true
-    });
+    if (!map.restoreView())
+        map.locate({locate: true, setView: true, maxZoom: 12})
+    else
+        map.locate({locate: true, setView: false, maxZoom: 12});
+
+
+
     //if (!map.restoreView()){
-    map.setView([41.5, -93.5], 6);
     //}
 
 }
