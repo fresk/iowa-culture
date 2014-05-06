@@ -157,7 +157,7 @@ function initMapView(places){
         var m = new L.Marker(latlng, {
             title: item.title
         });
-        m.bindPopup('<a href="#/location/'+item._id+'" >'+item.title+'</a>')
+        m.bindPopup('<a href="#/location/'+item._id+'" >'+item.title+'</a>');
         m.addTo(map);
     })
 
