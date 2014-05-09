@@ -14,6 +14,19 @@ module.exports = {
         this.app.setRootView(screens.HomeScreen);
     },
 
+    "/search": function(){
+        console.log("SEARCH");
+        this.app.setRootView(screens.SearchScreen);
+    },
+
+
+    "/search/results": function(){
+        console.log("SEARCH RESULTS");
+        console.log(app.searchResults);
+        screens.LocationListScreen.data.listData = app.searchResults;
+        this.app.setRootView(screens.LocationListScreen);
+    },
+
     "/nearme": function(){
         console.log("nearme");
         screens.MapScreen.data.listData = app.locations;
@@ -36,8 +49,9 @@ module.exports = {
 
         console.log("EXPLORE LOCATE", result, include_categories);
 
+        screens.LocationListScreen.data.listData = result;
         this.app.setRootView(screens.LocationListScreen);
-        this.app.rootView.listData = result;
+        //this.app.rootView.listData = result;
 
     },
 
@@ -56,6 +70,8 @@ module.exports = {
         })
         this.app.setRootView(screens.FeaturedScreen);
     },
+
+
 
     "/location/:id": function(uid){
         console.log("LOCATION", uid)

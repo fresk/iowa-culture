@@ -1,0 +1,34 @@
+<div class="search-screen" v-transition>
+
+  <header class="bar bar-nav">
+    <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+    <a href="#/search" class="icon icon-search pull-right back-button"></a>
+    <a href="#/home" class="header-logo"></a>
+  </header>     
+
+  <nav class="bar bar-standard bar-footer">
+    <a class="glyphicons white dislikes pull-left"></a>
+    <a class="glyphicons white direction pull-right"></a>
+  </nav>
+
+  <div class="content">
+
+    <input type="text" v-model="query" class="form-control">
+    <!--<button class="btn btn_search"><span class="icon icon-search"></span></button>-->
+    <button v-on="click: doSearch" class="btn pull-right">Search</button>
+
+    <img v-show="showSpinner" class="spinner" src="/img/loading.gif">
+
+    <div class="result-view" v-show="showResults">
+      <p>Found {{numHits}} results.</p>
+      <a href="#/search/results">view results list</a>
+    
+    </div>
+
+
+  </div>
+
+  </div>
+</div>
+
+

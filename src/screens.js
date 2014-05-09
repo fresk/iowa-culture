@@ -1,5 +1,6 @@
 
 var _= require('lodash');
+var request = require("superagent")
 require('./lib/leaflet/leaflet'); //attaches to window.L
 require('./lib/leaflet/bouncemarker'); //attaches to window.L
 require('./lib/leaflet/leaflet.restoreview'); //attaches to window.L
@@ -14,6 +15,41 @@ L.Icon.Default.imagePath = "./lib/leaflet/images"
 exports.HomeScreen = {
     template: require('./views/home.html')
 };
+
+
+// SEARCH /////////////////////////////////////////////////
+exports.SearchScreen = {
+    template: require('./views/search.html'),
+    data: {
+        query: "",
+        showSpinner: false,
+        showResults: false,
+        numHits: 0
+    },
+    attach: function(){
+        this.showSpinner = false;
+        this.showResults = false;
+    },
+    methods: {
+        doSearch: function(){
+            console.log("DO SEARCH", this.query)
+            this.showSpinner = true;
+            var elastic_query = "http://saskavi.com:9200/dca/_search?size=2000&q="+this.query;
+            var self = this;
+            request.get(elastic_query, function(res){
+                self.numHits = res.body.hits.total;
+                self.showSpinner = false;
+                self.showResults = true;
+                app.searchResults = _.pluck(res.body.hits.hits, "_source");
+                console.log(res.body.hits.total);
+                console.log(res.body);
+            });
+
+        }
+    }
+
+};
+
 
 
 // EXPLORE /////////////////////////////////////////////////

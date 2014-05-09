@@ -16,6 +16,14 @@
   -moz-user-select: none;
   -ms-user-select: none;
 
+div
+  transition: all 1s 
+  opacity: 1.0
+  &.v-leave 
+    opacity: 0.0
+  &.v-enter
+    opacity: 0.0   
+
 body.phonegap-ios-7
   margin-top: 20px;
 
@@ -32,6 +40,12 @@ body.phonegap-ios-7
   background-color: #4D4D4F
   a
     color: #fff
+
+.back-button
+  min-width: 45px;
+  min-height: 45px;
+  padding-left: 10px;
+  margin-left:-10px;
 
 .header-logo
   img: "img/title.png"
@@ -250,3 +264,38 @@ body.phonegap-ios-7
             
 #map
   size: 100% 100%     
+
+
+
+// ========================================
+// SEARCH SCREEN
+// ======================================== 
+
+
+.search-screen
+  .content
+    padding: 20px;
+    padding-right: 20px;
+    padding-top: 60px;
+
+    button
+      font-size: 1em
+
+  .spinner
+    display: block
+    margin: auto
+    margin-top: 150px
+
+  .result-view
+    position: absolute;
+    margin-top: 150px
+    width: 100%
+    text-align: center
+
+  .btn_search
+    absolute top 60px right 20px
+    size: 50px
+    padding-left: 15px
+    font-size: 1em
+    background-color: rgba(0,0,0,0)
+    

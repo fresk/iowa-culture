@@ -6,6 +6,8 @@ module.exports = {
 
   'categories': require('./categories.json'),
 
-  'context': {}
+  'context': {},
+
+  'searchResults': []
 
 }
