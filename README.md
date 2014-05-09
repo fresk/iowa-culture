@@ -14,4 +14,4 @@ to run dev server:
 to run a phonegap build online to update the application on actual phone:
  - open terminal
  - `cd code/iowa-culture` to go into the project directory
- - `./deploy.sh` will zip up the dist folder, upload and tell adobe to rebuild the app pkg
+ - `./deploy.sh` will zip up the dist folder, upload and tell adobe to rebuild the app pkg (uses $PHONEGAP_PASSWORD, or change to your own account data)
