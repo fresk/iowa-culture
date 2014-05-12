@@ -29,7 +29,7 @@ module.exports = {
 
     "/nearme": function(){
         console.log("nearme");
-        screens.MapScreen.data.listData = app.locations;
+        //screens.MapScreen.data.listData = app.locations;
         this.app.setRootView(screens.MapScreen);
     },
 
