@@ -1,5 +1,4 @@
 var _ = require('lodash');
-var screens = require('./screens');
 
 module.exports = {
 
@@ -10,32 +9,38 @@ module.exports = {
 
 
     "/home": function(){
-        console.log("HOME");
-        this.app.setRootView(screens.HomeScreen);
+        //console.log("HOME");
+        //this.app.setRootView(screens.HomeScreen);
+        window.app.currentScreen = 'home';
     },
 
     "/search": function(){
-        console.log("SEARCH");
-        this.app.setRootView(screens.SearchScreen);
+        //console.log("SEARCH");
+        //this.app.setRootView(screens.SearchScreen);
+        window.app.currentScreen = 'search';
     },
 
 
     "/search/results": function(){
-        console.log("SEARCH RESULTS");
-        console.log(app.searchResults);
-        screens.LocationListScreen.data.listData = app.searchResults;
-        this.app.setRootView(screens.LocationListScreen);
+        //console.log("SEARCH RESULTS");
+        //console.log(app.searchResults);
+        //screens.LocationListScreen.data.listData = app.searchResults;
+        //this.app.setRootView(screens.LocationListScreen);
+        window.app.currentScreen = 'location-list';
     },
 
     "/nearme": function(){
-        console.log("nearme");
+        //console.log("nearme");
         //screens.MapScreen.data.listData = app.locations;
-        this.app.setRootView(screens.MapScreen);
+        //this.app.setRootView(screens.MapScreen);
+        window.app.currentScreen = 'map';
     },
 
     "/explore": function(){
-        console.log("EXPLORE");
-        this.app.setRootView(screens.ExploreScreen);
+        //console.log("EXPLORE");
+        //this.app.setRootView(screens.ExploreScreen);
+        window.app.currentScreen = 'explore';
+        console.log("explore");
     },
 
     "/explore/locate": function(){
@@ -65,20 +70,24 @@ module.exports = {
 
     "/featured": function(){
         console.log("FEATURED");
-        screens.FeaturedScreen.data.listData = _.filter(app.locations, function(loc){
-            return loc.featured == "true";
-        })
-        this.app.setRootView(screens.FeaturedScreen);
+        app.currentScreen = 'featured';
     },
 
 
 
     "/location/:id": function(uid){
-        console.log("LOCATION", uid)
-            //app.context = this.app.getLocation(uid);
-            //console.log(app.contect, uid, app.getLocation(uid))
-            app.context = _.find(app.locations, {_id: uid});
-        app.setRootView(screens.LocationScreen);
+        console.log("LOCATION", uid);
+        app.context = window.es.get({
+          index: 'dca',
+          type: 'location',
+          id: uid
+        }, function(err, response){
+          console.log(response)
+          app.context = response._source.properties;
+          console.log(app.context);
+          app.currentScreen = "location-detail";
+        });
+
     }
 
 }

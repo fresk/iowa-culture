@@ -15,9 +15,9 @@
   <div class="content">
 
     <ul class="table-view">
-      <li v-repeat="listData" class="table-view-cell">
-      <a class="navigate-right" href="#/location/{{_id}}">
-        {{title}}
+      <li v-repeat="searchResults" class="table-view-cell">
+      <a class="navigate-right" href="#/location/{{properties._id}}">
+        {{properties.title}}
       </a>
       </li>
     </ul>

@@ -4,7 +4,9 @@ var fastclick = require('fastclick');
 var director = require('director');
 var $ = require('jquery');
 
-Vue.use(VueTouch);
+//Vue.use(VueTouch);
+var fastclick = require('fastclick');
+var director = require('director');
 fastclick(document.body);
 
 
@@ -19,9 +21,6 @@ module.exports = Vue.extend({
   created: function(){
     this.$router = new director.Router(this.$options.routes);
     this.$router.app = this;
-
-    this.$data.rootView = null;
-    this.$data.rootContext = null;
   },
 
   methods: {

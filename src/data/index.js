@@ -2,7 +2,7 @@
 
 module.exports = {
 
-  'locations': require('./locations.json'),
+  'locations': [], //require('./locations.json'),
 
   'categories': require('./categories.json'),
 

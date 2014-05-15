@@ -2,12 +2,8 @@
 @require 'lib/css/ratchet.css'
 @require 'lib/css/glyphicons.css'
 
-@require 'lib/leaflet/leaflet.css'
 @require 'lib/leaflet/leaflet.usermarker.css'
-@require 'lib/leaflet/MarkerCluster.Default.css'
-@require 'lib/leaflet/MarkerCluster.css'
 
-@require 'lib/leaflet/leaflet.awesome-markers.css'
 
 *
   -webkit-touch-callout: none;
@@ -23,8 +19,8 @@ input
   -ms-user-select: text; 
   
 
-div
-  transition: all 1s 
+.app-screen
+  transition: opacity 1s 
   opacity: 1.0
   &.v-leave 
     opacity: 0.0
@@ -36,6 +32,10 @@ body.phonegap-ios-7
 
 
 #app
+  background-color: #000;
+  position: absolute;
+  top:0;
+  left:0;
   size: 100% 100%
   &> div
     size: 100% 100%
@@ -74,10 +74,10 @@ body.phonegap-ios-7
 .home-screen
   transition: all 1s 
   opacity: 1.0
-  &.v-leave 
-    opacity: 0.0
-  &.v-enter
-    opacity: 0.0 
+  //&.v-leave 
+  //  opacity: 0.0
+  //&.v-enter
+  //  opacity: 0.0 
 
 
   .content
@@ -155,10 +155,10 @@ body.phonegap-ios-7
 .explore-screen
   transition: all 1s 
   opacity: 1.0
-  &.v-leave 
-    opacity: 0.0
-  &.v-enter
-    opacity: 0.0 
+  //&.v-leave 
+  //  opacity: 0.0
+  //&.v-enter
+  //  opacity: 0.0 
 
   li
     position: relative
@@ -211,10 +211,10 @@ body.phonegap-ios-7
 .location-screen
   transition: all 1s 
   opacity: 1.0
-  &.v-leave 
-    opacity: 0.0
-  &.v-enter
-    opacity: 0.0 
+  //&.v-leave 
+  ///  opacity: 0.0
+  //&.v-enter
+  //  opacity: 0.0 
 
   .images
     
@@ -259,6 +259,12 @@ body.phonegap-ios-7
         color: #544A41
 
 
+#map
+  size: 100% 100%;
+
+
+.leaflet-popup-close-button
+    display: none;
 
 
 // ========================================
@@ -268,9 +274,6 @@ body.phonegap-ios-7
 
 .map-screen
   size: 100% 100%
-            
-#map
-  size: 100% 100%     
 
 
 
