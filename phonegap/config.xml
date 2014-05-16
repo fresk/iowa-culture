@@ -17,12 +17,6 @@
         FRESK, LLC
     </author>
 
-    <gap:platform name="ios" />
-    <gap:platform name="android" />
-    <gap:platform name="winphone" />
-
-
-
 
     <access origin="*"/>
     <preference name="orientation"                value="portrait" />       <!-- all: default means both landscape and portrait are enabled -->
@@ -34,12 +28,18 @@
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
 
-    <gap:plugin name="com.phonegap.plugin.statusbar" />
+
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
     <gap:plugin name="org.apache.cordova.geolocation" />
-
-<feature name="Geolocation">
-    <param name="ios-package" value="CDVLocation" />
-</feature>
-
+    <gap:plugin name="com.phonegap.plugin.statusbar" />
 
 </widget>

@@ -6,16 +6,16 @@ var screens = require('./screens');
 
 
 function main(){
+  fastclick(document.body);
+
   //router
   window.router =  new director.Router(require('./routes'));
-
 
   //elastic search backend
   window.es = new elasticsearch.Client({
     host: 'iowaculture.fresk.io:9200',
     log: 'info'
   });
-
 
   //our main view controller
   window.app = new Vue({
@@ -31,9 +31,10 @@ function main(){
 
     ready: function(){
       window.router.init("/home");
-
     }
   });
+
+window.map_reset = true;
 }
 
 
@@ -41,32 +42,20 @@ function main(){
 
 
 // Wait for device API libraries to load
-//
-document.addEventListener("deviceready", onDeviceReady, false);
-
-// device APIs are available
-//
 function onDeviceReady() {
-
-  fastclick(document.body);
-  if (window.StatusBar)
+  console.log("=== DEVICE READY =========================")
+  if (window.StatusBar){
+    StatusBar.overlaysWebView(false);
     StatusBar.hide();
-
+  }
   main();
-
-  navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  // onSuccess Geolocation
-  function onSuccess(position) {
-    app.userLocaton = position
-  }
-  // onError Callback receives a PositionError object
-  function onError(error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-  }
 }
 
 
-
+if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+  document.addEventListener("deviceready", onDeviceReady, false);
+} else {
+  main(); //this is the browser
+}
 
 

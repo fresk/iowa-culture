@@ -16,6 +16,7 @@
     "log-browser": "0.0.3",
     "mapbox.js": "^1.6.2",
     "nib": "^1.0.2",
+    "sanitize-caja": "^0.1.0",
     "sugar": "^1.4.1",
     "superagent": "^0.17.0",
     "touchclick": "^3.1.0",

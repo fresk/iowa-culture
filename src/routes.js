@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var sanitize = require('sanitize-caja');
 
 module.exports = {
 
@@ -11,6 +12,7 @@ module.exports = {
     "/home": function(){
         //console.log("HOME");
         //this.app.setRootView(screens.HomeScreen);
+        window.map_reset = true;
         window.app.currentScreen = 'home';
     },
 
@@ -46,16 +48,19 @@ module.exports = {
     "/explore/locate": function(){
 
         include_categories = _.keys(app.rootView.selected);
-        var result = _.filter(app.locations, function(loc){
-            return _.any(loc.categories, function(cat){
-                return _.contains(include_categories, cat);
-            });
-        });
 
-        console.log("EXPLORE LOCATE", result, include_categories);
 
-        screens.LocationListScreen.data.listData = result;
-        this.app.setRootView(screens.LocationListScreen);
+
+        //var result = _.filter(app.locations, function(loc){
+            //return _.any(loc.categories, function(cat){
+                //return _.contains(include_categories, cat);
+            //});
+        //});
+
+        //console.log("EXPLORE LOCATE", result, include_categories);
+
+        //screens.LocationListScreen.data.listData = result;
+        //this.app.setRootView(screens.LocationListScreen);
         //this.app.rootView.listData = result;
 
     },
@@ -74,7 +79,6 @@ module.exports = {
     },
 
 
-
     "/location/:id": function(uid){
         console.log("LOCATION", uid);
         app.context = window.es.get({
@@ -82,9 +86,10 @@ module.exports = {
           type: 'location',
           id: uid
         }, function(err, response){
-          console.log(response)
-          app.context = response._source.properties;
-          console.log(app.context);
+          //console.log(response._source.properties);
+          var data = response._source.properties;
+          data.description = sanitize(data.description);
+          app.context = data;
           app.currentScreen = "location-detail";
         });
 
