@@ -15,6 +15,11 @@
     <ul class="table-view">
 
 
+      <li class="table-view-divider" v-on="click: toggleSelectAll('ALL', $event)" >
+        Select All
+        <a class="glyphicons icon {{selectAll ? 'check': 'unchecked'}}"  v-on="click: toggleSelectAll('ALL', $event)"  ></a>
+    </li>
+
       <li class="table-view-divider" v-on="click: groups.art = !groups.art" >
         Art 
         <a class="glyphicons icon {{isSelectAll('art')}}" v-on="click: toggleSelectAll('art', $event)" ></a>
