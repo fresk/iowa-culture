@@ -42,10 +42,11 @@ Vue.component('search', {
                 q: this.query,
                 size: 2000
             }, function(err, res) {
-                self.numHits = res.hits.total;
+                //self.numHits = res.hits.total;
                 self.showSpinner = false;
-                self.showResults = true;
+                //self.showResults = true;
                 app.searchResults = _.pluck(res.hits.hits, "_source");
+                window.location = "/#/search/results";
             });
 
         }
@@ -174,6 +175,21 @@ Vue.component('map', {
             initMap(map_widget);
         });
     },
+
+    methods: {
+
+        locateUser: function(){
+            map.locate({
+                watch: false,
+                locate: true,
+                setView: true,
+                enableHighAccuracy: true,
+                maxZoom: 16
+            });
+
+        }
+
+    }
 
 });
 
