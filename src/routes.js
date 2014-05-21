@@ -1,5 +1,7 @@
 var _ = require('lodash');
 var sanitize = require('sanitize-caja');
+var request = require("superagent");
+var queries = require('./queries')
 
 module.exports = {
 
@@ -52,9 +54,9 @@ module.exports = {
 
 
         //var result = _.filter(app.locations, function(loc){
-            //return _.any(loc.categories, function(cat){
-                //return _.contains(include_categories, cat);
-            //});
+        //return _.any(loc.categories, function(cat){
+        //return _.contains(include_categories, cat);
+        //});
         //});
 
         //console.log("EXPLORE LOCATE", result, include_categories);
@@ -67,10 +69,7 @@ module.exports = {
 
     "/tours": function(){
         console.log("TOURS");
-        screens.ToursScreen.data.listData = _.filter(app.locations, function(loc){
-            return false;
-        })
-        this.app.setRootView(screens.ToursScreen);
+        app.currentScreen = 'tours';
     },
 
     "/featured": function(){
@@ -82,15 +81,15 @@ module.exports = {
     "/location/:id": function(uid){
         console.log("LOCATION", uid);
         app.context = window.es.get({
-          index: 'dca',
-          type: 'location',
-          id: uid
+            index: 'dca',
+            type: 'location',
+            id: uid
         }, function(err, response){
-          //console.log(response._source.properties);
-          var data = response._source.properties;
-          data.description = sanitize(data.description);
-          app.context = data;
-          app.currentScreen = "location-detail";
+            //console.log(response._source.properties);
+            var data = response._source.properties;
+            data.description = sanitize(data.description);
+            app.context = data;
+            app.currentScreen = "location-detail";
         });
 
     }

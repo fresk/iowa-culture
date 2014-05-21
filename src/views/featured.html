@@ -1,29 +1,45 @@
-<div class="explore-screen" v-transition>
+<div class="featured-screen" v-transition>
 
-  <header class="bar bar-nav">
-    <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
-    <a href="#/search" class="icon icon-search pull-right back-button"></a>
-    <a href="#/home" class="header-logo"></a>
-  </header> 
+    <header class="bar bar-nav">
+        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
+        <a href="#/home" class="header-logo"></a>
+    </header> 
 
-  <nav class="bar bar-tab">
-    <a href="#/help" >
-      <div class="help"></div>
-    </a>
-  </nav>
+    <nav class="bar bar-tab">
+        <a href="#/help" >
+            <div class="help"></div>
+        </a>
+    </nav>
 
 
-  <div class="content">
-    <h2>Featured</h2>
+    <div class="content">
 
-    <ul class="table-view">
-      <li v-repeat="listData" class="table-view-cell">
-      <a class="navigate-right" href="#/location/{{_id}}">
-        {{title}}
-      </a>
-      </li>
-    </ul>
+        <ul class="table-view">
 
-  </div>
+            <li class="table-view-divider featured-table-divider" >
+                Places
+            </li>
+
+            <li v-repeat="featuredLocations" class="table-view-cell">
+                <a class="navigate-right" href="#/location/{{properties._id}}">
+                    {{properties.title}}
+                </a>
+            </li>
+
+
+            <li class="table-view-divider featured-table-divider" >
+                Tours
+            </li>
+            <li class="table-view-cell">
+                    TODO
+            </li>
+
+
+
+
+        </ul>
+
+    </div>
 </div>
 

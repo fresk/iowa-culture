@@ -4,6 +4,7 @@ var _ = require('lodash');
 var request = require("superagent");
 var es = require("elasticsearch");
 var $ = require('jquery');
+var queries = require('./queries');
 //require('./lib/leaflet/leaflet'); //attaches to window.L
 //require('./lib/leaflet/bouncemarker'); //attaches to window.L
 //require('./lib/leaflet/leaflet.restoreview'); //attaches to window.L//
@@ -151,6 +152,20 @@ Vue.component('location-detail', {
 // MY TOURS /////////////////////////////////////////////////
 Vue.component('tours', {
     template: require('./views/tours.html'),
+
+    data: {
+        showCreateTour: false,
+    },
+
+
+    methods: {
+    
+        createTour: function(){
+        
+            alert("show create tour overlay");
+        }
+    
+    }
 });
 
 
@@ -295,6 +310,21 @@ function centerOnUser(location){
 
 
 var categories = require("./data/categories.json");
+
+
+
+function findFeaturedLocations(cb){
+    var search = {
+        "query": {
+        "match" : {
+            "properties.featured" : true
+        }
+      } 
+    };
+
+    searchLocations(search, cb);
+
+}
 
 
 
