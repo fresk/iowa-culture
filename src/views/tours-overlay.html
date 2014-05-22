@@ -1,0 +1,23 @@
+
+<div class="add-tour-overlay" v-transition>
+    <h4>Create Tour</h4>
+    <form>
+        <label for="new-tour-title">Title</label>
+        <input type="text" name="new-tour-title" id="new-tour-title" v-model="title" value="" />
+
+        <label for="new-tour-color">Color</label>
+
+        <div class="add-tour-color-choices">        
+            <button class="add-tour-color-choice" 
+                v-repeat="colors" 
+                v-style="background-color: $value" 
+                v-on="click: selectColor($value, $event)"    
+            ></button>
+        </div>
+
+        
+        <a v-on="click: cancel($event)" class="btn tour-form-buttom" type="reset">Cancel</a>
+        <a v-on="click: create($event)" class="btn tour-form-buttom" type="submit">Create</a>
+
+    </form>
+</div>
