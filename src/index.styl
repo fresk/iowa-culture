@@ -309,4 +309,57 @@ body.phonegap-ios-7
     padding-left: 15px
     font-size: 1em
     background-color: rgba(0,0,0,0)
-    
+
+
+
+
+// ========================================
+// SEARCH SCREEN
+// ======================================== 
+
+
+//.mytours-screen
+.add-tour-overlay
+    font-size: .8em;
+    position: absolute;
+    z-index: 500;
+    width: 280px;
+    left: 20px;
+    top: 150px;
+    border-radius: 10px;
+    background-color: #f9f9f1;
+    border: 1px solid #434037;
+    padding: 20px;
+    box-shadow: 0 0 10px 2px #aaa;
+    transition: all 0.2s ease-out;
+    opacity: 1.0
+    transform: scale(1);
+
+    &.v-leave 
+        opacity: 0.0
+        //transform: scale(2);
+        transform: translateY(200px);
+        
+    &.v-enter
+        opacity: 0.0 
+        transform: scale(2);
+
+.add-tour-color-choices
+    padding-bottom: 20px;
+    display : flex;
+    justify-content: space-between;
+    width: 100%;
+
+.add-tour-color-choice
+    border: 0;
+    border-radius: 2px;
+    size: 27px 30px;
+
+
+
+.add-tour-color-choice.selected
+    border: 2px solid #fff;
+
+
+.tour-form-buttom
+    font-size: 1.3em;

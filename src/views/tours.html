@@ -10,34 +10,25 @@
         <a href="#/help" >
             <div class="help"></div>
         </a>
-        
-
-
     </nav>
 
 
+
     <div class="content">
-
         <ul class="table-view">
-
             <li class="table-view-cell">
                 <a class="navigate-right" href="#/tours/favorites}}">
                     Favorites
                 </a>
             </li>
-
-            <li v-repeat="myTours" class="table-view-cell">
-                    Tour Name
+            <li v-repeat="myTours" class="table-view-cell" v-style="background-color: color">
+                {{title}}
             </li>
-
-
-
-
-
-
         </ul>
-
     </div>
+
+    <add-tour-overlay v-if="showCreateTour" ></add-tour-overlay>
+
 </div>
 
 

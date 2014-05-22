@@ -7,6 +7,9 @@ var queries = require('./queries');
 
 
 
+
+
+
 function main(){
     fastclick(document.body);
 
@@ -24,23 +27,23 @@ function main(){
         el: '#app',
 
         data: {
-            userLocaton: null,
-            showMap: false,
-            currentScreen: 'home',
+            currentScreen: getParameterByName('screen') || 'home',
+            shades: require('./data/shades.json'),
+            colors: require('./data/colors.json'),
+
             searchResults: [],
             featuredLocations: [],
+            
+            userLocaton: null,
+            showMap: false,
+            
             myTours: [],
             context: {},
         },
 
         ready: function(){
-            window.router.init("/home");
+            window.router.init("/"+this.currentScreen);
 
-            var screenOveride = getParameterByName('screen');
-            if (screenOveride){
-                console.log(screenOveride);
-                app.currentScreen = screenOveride;
-            }
 
             queries.findFeaturedLocations(function(err, places){
                 console.log(places);

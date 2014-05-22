@@ -11,6 +11,7 @@ var queries = require('./queries');
 //L.Icon.Default.imagePath = "./lib/leaflet/images"
 require('./lib/leaflet/leaflet.usermarker'); //attaches to window.L
 
+var categories = require("./data/categories.json");
 
 
 
@@ -149,6 +150,7 @@ Vue.component('location-detail', {
 
 
 
+
 // MY TOURS /////////////////////////////////////////////////
 Vue.component('tours', {
     template: require('./views/tours.html'),
@@ -156,17 +158,48 @@ Vue.component('tours', {
     data: {
         showCreateTour: false,
     },
-
-
     methods: {
-    
         createTour: function(){
-        
-            alert("show create tour overlay");
+            this.showCreateTour = true;
         }
-    
     }
 });
+
+Vue.component('add-tour-overlay', {
+    template: require('./views/tours-overlay.html'),
+    replace: true,
+    data: {
+        title: "",
+        color: ""
+    },
+    methods: {
+        selectColor: function(color, ev){
+            console.log(color, ev);
+            this.color = color;
+            ev.preventDefault();
+        },
+        cancel: function(ev){
+            ev.preventDefault();
+            this.$parent.showCreateTour = false;
+        },
+        create: function(ev){
+            ev.preventDefault();
+            app.myTours.push({
+                title: this.title,
+                color: this.color,
+                places: []
+            });
+            this.$parent.showCreateTour = false;
+        }
+
+
+    }
+
+
+});
+
+
+
 
 
 // FEATURED /////////////////////////////////////////////////
@@ -309,17 +342,16 @@ function centerOnUser(location){
 
 
 
-var categories = require("./data/categories.json");
 
 
 
 function findFeaturedLocations(cb){
     var search = {
         "query": {
-        "match" : {
-            "properties.featured" : true
-        }
-      } 
+            "match" : {
+                "properties.featured" : true
+            }
+        } 
     };
 
     searchLocations(search, cb);
