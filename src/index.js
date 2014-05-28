@@ -28,8 +28,11 @@ function main(){
 
         data: {
             currentScreen: getParameterByName('screen') || 'home',
+
+            categories: require('./data/categories.json'),
             shades: require('./data/shades.json'),
             colors: require('./data/colors.json'),
+            markers: require('./data/markers.json'),
 
             searchResults: [],
             featuredLocations: [],

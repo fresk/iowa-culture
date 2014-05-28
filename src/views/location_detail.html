@@ -13,8 +13,8 @@
 
   <div class="content">
 
-    <div class="images">
-      <img v-attr="src: context.images[0]" alt="">
+      <div class="images" style=" background-color: {{context.icon.color}}">
+          <img v-attr="src: preview_image" class="{{preview_image_class}}" alt="">
     </div>
     <div class="info">
 

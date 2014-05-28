@@ -86,7 +86,27 @@ module.exports = {
             id: uid
         }, function(err, response){
             //console.log(response._source.properties);
-            var data = response._source.properties;
+            var p = response._source;
+            for( var i=0; i < p.properties.categories.length; i++){
+                var cat = p.properties.categories[i];
+                if (app.markers[cat]){
+                    icon = "img/markers/512/"+app.markers[cat]+".png";
+                    console.log(icon);
+                    p.properties.icon = {
+                        "iconUrl": icon,
+                        "iconSize": [32, 32],
+                        "iconAnchor": [15, 15],
+                        "popupAnchor": [0, -20],
+                        "className": "dca-marker",
+                        "color": app.colors[cat]
+                    }
+                }
+            }
+
+
+
+
+            var data = p.properties;
             data.description = sanitize(data.description);
             app.context = data;
             app.currentScreen = "location-detail";

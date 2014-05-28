@@ -3,6 +3,7 @@ var categories = require("./data/categories.json");
 var request = require("superagent");
 var es = require("elasticsearch");
 var _ = require('lodash');
+var $ = require('jquery');
 
 
 
@@ -81,26 +82,39 @@ function searchLocations(search, cb){
 
         var places = _.pluck(resp.body.hits.hits, "_source");
         _.forEach(places, function(p){
-            var color = "#b45658";
-            var icon = "marker";
-            var i, cat;
-            for( i=0; i < p.properties.categories.length; i++){
-                cat = p.properties.categories[i];
-                color = categories.markerColor[cat];
-                if (color)
+            var icon = false;
+            //for( var i=0; i < p.properties.categories.length; i++){
+                //var cat = p.properties.categories[i];
+                //if (app.colors[cat]){
+                    //color = app.colors[cat];
+                    //break;
+                //}
+            //}
+            for( var i=0; i < p.properties.categories.length; i++){
+                var cat = p.properties.categories[i];
+                if (app.markers[cat]){
+                    icon = "img/markers/64/"+app.markers[cat]+".png";
+                    console.log(icon);
+                    p.properties.icon = {
+                        "iconUrl": icon,
+                        "iconSize": [32, 32],
+                        "iconAnchor": [15, 15],
+                        "popupAnchor": [0, -20],
+                        "className": "dca-marker"
+                    }
                     break;
-            }
-            for( i=0; i < p.properties.categories.length; i++){
-                cat = p.properties.categories[i];
-                icon = categories.markerIcons[cat];
-                if (color)
-                    break;
+                }
             }
             p.properties.description = L.mapbox.sanitize(p.properties.description);
-            console.log(p.properties.description );
-            p.properties['marker-color'] = color;
-            p.properties['marker-symbol'] = icon;
-            console.log(p.properties.title, p.properties.categories, p.properties['marker-symbol']);
+            //p.properties['marker-symbol'] = icon;
+        });
+
+
+        places = _.filter(places, function(p){
+            console.log("filter", p.properties.icon);
+            if (p.properties.icon)
+                return true;
+                //console.log("omitting", p.properties);
         });
 
         if (window.markerLayer){
@@ -110,6 +124,12 @@ function searchLocations(search, cb){
                 layer.bindPopup(content);
             });
         }
+
+        setTimeout(function(){
+            $('.dca-marker').addClass('marker-fade-in')
+        
+        }, 100);
+
 
         cb(null, places);
     });

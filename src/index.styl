@@ -17,7 +17,16 @@ input
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text; 
-  
+
+
+
+.dca-marker
+    opacity: 0.0;
+    transition: opacity .5s;
+
+.marker-fade-in
+    opacity: 1.0;
+
 
 .app-screen
   transition: opacity 1s 
@@ -223,10 +232,16 @@ body.phonegap-ios-7
     size: 100% 140px
     overflow: hidden
     img
-      transform: translateY(-50%)
-      margin-top:70px
-      width: 320px
 
+      &.icon-photo
+        transform: translateY(-50%) 
+        width: 320px;
+        height: auto;
+
+      &.icon-preview
+        transform: translateY(-35px) translateX(30px)
+        width: 280px
+        height: 280px
 
   .info
     padding:1em
@@ -348,12 +363,12 @@ body.phonegap-ios-7
     padding-bottom: 20px;
     display : flex;
     justify-content: space-between;
-    width: 100%;
 
 .add-tour-color-choice
     border: 0;
     border-radius: 2px;
     size: 27px 30px;
+    max-width: 27px;
 
 
 

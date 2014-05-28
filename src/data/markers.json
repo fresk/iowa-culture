@@ -1,0 +1,46 @@
+{
+    "art_museum"                 : "marker-art-museum",
+    
+    "art_performing"             : "marker-art-performingarts",
+    "amphitheater"               : "marker-art-performingarts",
+    
+    "art_public"                 : "marker-art-publicart",
+    "art_commercial"             : "marker-art-publicart",
+    "post_office_murals"         : "marker-art-publicart",
+    "arts_council"               : "marker-art-publicart",
+
+    "monument_memorial"          : "marker-art-monument",
+
+    "barn"                       : "marker-history-barn",
+    "cemetery"                   : "marker-history-monument",
+    "history_museum"             : "marker-history-building",
+    
+    "country_school"             : "marker-history",
+    "historic_ballrooms"         : "marker-history",
+    "historic_district"          : "marker-history",
+    "historic_hotel"             : "marker-history",
+    "historic_site"              : "marker-history",
+    "historic_marker"            : "marker-history",
+    "heritage_area"              : "marker-history",
+    "national_historic_landmark" : "marker-history",
+    "national_historic_register" : "marker-history",
+    "historic_unique"            : "marker-history",
+    "historical_society"         : "marker-history",
+    "local_landmark"             : "marker-history",
+    "underground_railroad"       : "marker-history",
+
+    "theater"                    : "marker-history-film",
+    "tvmovie_site"               : "marker-history-film",
+    
+    "notable_iowan"              : "marker-history-person",
+    "gov_gravesite"              : "marker-history-person",
+    "famous_iowan"               : "marker-history-person",
+    "honored_iowan"              : "marker-history-person",
+    "iowa_award"                 : "marker-history-person",
+    "medal_of_honor"             : "marker-history-person",
+
+    "botany"                     : "marker-science-gardens",
+    "science"                    : "marker-science-science",
+    "zoo"                        : "marker-science-zoos",
+
+}

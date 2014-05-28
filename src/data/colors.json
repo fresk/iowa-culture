@@ -6,5 +6,42 @@
     "cyan": "#52B8C2",
     "purple": "#91637F",
     "blue": "#3A4050",
-    "gray": "#4D4D4F"
+    "gray": "#4D4D4F",
+
+
+
+    "art" : "#52B8C2",
+    "history" : "#B65556",
+    "science" : "#F5CE68",
+
+
+
+    "art_museum"                 : "#52B8C2",
+    "art_commercial"             : "#52B8C2",
+    "monument_memorial"          : "#52B8C2",
+    "art_performing"             : "#52B8C2",
+    "art_public"                 : "#52B8C2",
+    "post_office_murals"         : "#52B8C2",
+
+    "barn"                       : "#B65556",
+    "country_school"             : "#B65556",
+    "historic_ballrooms"         : "#B65556",
+    "historic_district"          : "#B65556",
+    "historic_hotel"             : "#B65556",
+    "history_museum"             : "#B65556",
+    "historic_site"              : "#B65556",
+    "historic_marker"            : "#B65556",
+    "heritage_area"              : "#B65556",
+    "state_historic_site"        : "#B65556",
+    "tvmovie_site"               : "#B65556",
+    "theater"                    : "#B65556",
+    "national_historic_landmark" : "#B65556",
+    "national_historic_register" : "#B65556",
+    "historic_unique"            : "#B65556",
+    "notable_iowan"              : "#B65556",
+    "gov_gravesite"              : "#B65556",
+
+    "botany"                     : "#F5CE68",
+    "science"                    : "#F5CE68",
+    "zoo"                        : "#F5CE68"
 }

@@ -11,7 +11,6 @@ var queries = require('./queries');
 //L.Icon.Default.imagePath = "./lib/leaflet/images"
 require('./lib/leaflet/leaflet.usermarker'); //attaches to window.L
 
-var categories = require("./data/categories.json");
 
 
 
@@ -82,7 +81,7 @@ Vue.component('explore', {
         submit: function (msg, e) {
             console.log("SUBMIT", this.selected);
             include_categories = _.keys(this.selected)
-            findLocationsWithCategory(include_categories, function(err, places){
+            queries.findLocationsWithCategory(include_categories, function(err, places){
                 console.log(places);
                 app.searchResults = places;
                 window.location = "#/search/results";
@@ -145,7 +144,26 @@ Vue.component('location-list', {
 
 // LOCATION DETAIL /////////////////////////////////////////////////
 Vue.component('location-detail', {
-    template: require('./views/location_detail.html')
+    template: require('./views/location_detail.html'),
+
+    computed: {
+    
+        preview_image: function(){
+            if (app.context.images.length > 0 && app.context.images[0].length > 2)
+                return app.context.images[0];
+
+            console.log(app.context);
+            return app.context.icon.iconUrl;
+        },
+
+
+        preview_image_class: function(){
+            if (app.context.images.length > 0 && app.context.images[0].length > 2)
+                return "icon-photo";
+            return "icon-preview";
+        }
+    
+    }
 });
 
 
@@ -264,6 +282,15 @@ function initMap(el){
     window.markerLayer = L.mapbox.featureLayer();
     markerLayer.addTo(map);
 
+    // Customize each added layer
+    markerLayer.on('layeradd', function(e) {
+    var marker = e.layer,
+        feature = marker.feature;
+    marker.setIcon(L.icon(feature.properties.icon));
+    console.log(marker);
+    marker._icon.className += " .marker-fade-in"; 
+});
+
     markerLayer.on('click', function(e) {
         e.layer.openPopup();
     });
@@ -291,7 +318,7 @@ function initMap(el){
 function onMapDragEnd(e){
 
     setTimeout(function(){
-        loadMarkersInBounds(map.getBounds(), function(err, places){
+        queries.loadMarkersInBounds(map.getBounds(), function(err, places){
 
 
             setTimeout(function(){
@@ -335,135 +362,10 @@ function updateUserLocation(location){
 
 function centerOnUser(location){
 
-    loadNearByMarkers(location.latlng, function(err, places){
+    queries.loadNearByMarkers(location.latlng, function(err, places){
 
     })
 }
-
-
-
-
-
-
-function findFeaturedLocations(cb){
-    var search = {
-        "query": {
-            "match" : {
-                "properties.featured" : true
-            }
-        } 
-    };
-
-    searchLocations(search, cb);
-
-}
-
-
-
-function findLocationsWithCategory(categories, cb){
-    var search = {
-        "from": 0, "size": 50,
-        "filter" : {
-            "terms" : { "properties.categories": categories }
-        }
-    };
-    searchLocations(search, cb);
-
-
-}
-
-
-function loadNearByMarkers(latlng, cb){
-    var search = {
-        "from": 0, "size": 50,
-        "sort" : [{
-            "_geo_distance" : {
-                "geometry.coordinates" : {"lat" : latlng.lat, "lon" : latlng.lng},
-                "order" : "asc", "unit" : "m"
-            }
-        }]
-    };
-    searchLocations(search, cb);
-}
-
-
-
-function loadMarkersInBounds(bounds, cb){
-    var search = {
-        "size": 50,
-        "filter" : {
-            "geo_bounding_box" : {
-                "geometry.coordinates" : {
-                    "topRight" : {
-                        "lat" : bounds._northEast.lat,
-                        "lon" : bounds._northEast.lng
-                    },
-                    "bottomLeft" : {
-                        "lat" : bounds._southWest.lat,
-                        "lon" : bounds._southWest.lng,
-                    }
-                }
-            }
-        }
-    };
-    searchLocations(search, cb);
-}
-
-
-
-
-function searchLocations(search, cb){
-
-    request.post("http://iowaculture.fresk.io:9200/dca/location/_search", search, function(err, resp){
-
-        var places = _.pluck(resp.body.hits.hits, "_source");
-        _.forEach(places, function(p){
-            var color = "#b45658";
-            var icon = "marker";
-            for( var i=0; i < p.properties.categories.length; i++){
-                var cat = p.properties.categories[i];
-                color = categories.markerColor[cat];
-                if (color)
-                    break;
-            }
-            for( var i=0; i < p.properties.categories.length; i++){
-                var cat = p.properties.categories[i];
-                icon = categories.markerIcons[cat];
-                if (color)
-                    break;
-            }
-            p.properties.description = L.mapbox.sanitize(p.properties.description);
-            console.log(p.properties.description );
-            p.properties['marker-color'] = color;
-            p.properties['marker-symbol'] = icon;
-            console.log(p.properties.title, p.properties.categories, p.properties['marker-symbol']);
-        });
-
-        if (window.markerLayer){
-            window.markerLayer.setGeoJSON(places);
-            window.markerLayer.eachLayer(function(layer) {
-                var content = ' <h1><a href="#/location/'+layer.feature.properties._id+'">' + layer.feature.properties.title + '</a></h1>';
-                layer.bindPopup(content);
-            });
-        }
-
-        cb(null, places);
-    });
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
