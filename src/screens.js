@@ -34,6 +34,40 @@ Vue.component('screenMenuTabs', {
 
 
 
+Vue.component('limit-location', {
+    template: require('./views/limit-location-screen.html'),
+    methods: {
+        showSearchResults: function(){
+            console.log("show search results");
+            window.location = "#/nearme";
+        },
+        showNearbySearchResults: function(){
+            console.log("show search results");
+            window.location = "#/nearme";
+        }
+
+        
+    }
+});
+
+
+
+
+
+Vue.component('suggest-a-place', {
+    template: require('./views/suggest-a-place.html'),
+    methods: {
+        submitSuggestion: function(){
+            console.log("submitSuggestedPlace");
+        }
+    }
+});
+
+
+
+
+
+
 
 
 
@@ -56,9 +90,10 @@ Vue.component('search', {
             var elastic_query = "http://saskavi.com:9200/dca/_search?size=2000&q=" + this.query;
             var self = this;
 
-            window.es.search({
+            //window.es.search({
+            queries.searchLocations({
                 q: this.query,
-                size: 2000
+                size: 100
             }, function(err, res) {
                 //self.numHits = res.hits.total;
                 self.showSpinner = false;
@@ -94,14 +129,20 @@ Vue.component('explore', {
 
     methods: {
 
+        suggestAPlace: function(){
+            window.location = "#/suggestaplace";
+        },
+
         submit: function (msg, e) {
             console.log("SUBMIT", this.selected);
-            include_categories = _.keys(this.selected)
+            include_categories = _.keys(this.selected);
+            app.selectedCategories = include_categories;
+
             queries.findLocationsWithCategory(include_categories, function(err, places){
                 console.log(places);
                 app.searchResults = places;
-                window.location = "#/search/results";
             });
+            window.location = "#/search/limitlocation"
         },
 
         toggle: function(category) {
@@ -119,6 +160,7 @@ Vue.component('explore', {
         },
 
         toggleSelectAll: function(group, ev) {
+            console.log('toggle select all', group);
             if (group === "ALL"){
                 this.selectAll = !this.selectAll;
                 this.groupSelectAll['art'] = false;
@@ -145,6 +187,8 @@ Vue.component('explore', {
             if (ev){
                 ev.stopPropagation();
             }
+
+            console.log(this.isSelectAll('art'));
             return true;
         },
     }

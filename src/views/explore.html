@@ -20,44 +20,59 @@
 
 
       <li class="table-view-divider explore-select-all" v-on="click: toggleSelectAll('ALL', $event)" >
-        Select All
-        <a class="glyphicons icon {{selectAll ? 'check': 'unchecked'}}"  v-on="click: toggleSelectAll('ALL', $event)"  ></a>
+          Select All
+          <i class="checkmark-icon {{selectAll ? 'check': 'unchecked'}}" v-on="click: toggleSelectAll('ALL', $event)" ></i>
+
     </li>
 
-      <li class="table-view-divider" v-on="click: groups.art = !groups.art" >
-        Find Art 
-        <a class="glyphicons icon {{isSelectAll('art')}}" v-on="click: toggleSelectAll('art', $event)" ></a>
+      <li class="table-view-divider art-cell" v-on="click: groups.art = !groups.art" >
+          Find Art 
+          <img src="img/explore/brush.png" class="table-view_divider-icon">
+        <a class="checkmark-icon {{isSelectAll('art')}}" v-on="click: toggleSelectAll('art', $event)" ></a>
       </li>
-      <li class="table-view-cell {{groups.art ? '' : 'hide'}} " 
+      <li class="table-view-cell art-cell {{groups.art ? '' : 'hide'}} " 
           v-on="click: toggle($value)" 
           v-repeat="categories.art" >
         {{categories.displayNames[$value]}}
-        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+
+        <i class="checkmark-icon {{isSelected($value)}}"></i>
       </li>
                 
 
-      <li class="table-view-divider" v-on="click: groups.history = !groups.history" >
+      <li class="table-view-divider history-cell" v-on="click: groups.history = !groups.history" >
         History 
-        <a class="glyphicons icon {{isSelectAll('history')}}" v-on="click: toggleSelectAll('history', $event)" ></a>
+        <img src="img/explore/history.png" class="table-view_divider-icon">
+        <a class="checkmark-icon {{isSelectAll('history')}}" v-on="click: toggleSelectAll('history', $event)" ></a>
       </li>
-      <li class="table-view-cell {{groups.history ? '' : 'hide'}} " 
+      <li class="table-view-cell history-cell {{groups.history ? '' : 'hide'}} " 
           v-on="click: toggle($value)" 
           v-repeat="categories.history" >
-        {{categories.displayNames[$value]}}
-        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+          {{categories.displayNames[$value]}}
+        <i class="checkmark-icon {{isSelected($value)}}"></i>
+
       </li>     
      
 
-      <li class="table-view-divider" v-on="click: groups.science = !groups.science" >
-        Science and Nature 
-        <a class="glyphicons icon {{isSelectAll('science')}}" v-on="click: toggleSelectAll('science', $event)" ></a>
+      <li class="table-view-divider science-cell" v-on="click: groups.science = !groups.science" >
+          Science and Nature 
+
+          <img src="img/explore/sun.png" class="table-view_divider-icon">
+          <a class="checkmark-icon {{isSelectAll('science')}}" v-on="click: toggleSelectAll('science', $event)" ></a>
+
       </li>
-      <li class="table-view-cell {{groups.science ? '' : 'hide'}} " 
+      <li class="table-view-cell science-cell {{groups.science ? '' : 'hide'}} " 
           v-on="click: toggle($value)" 
           v-repeat="categories.science" >
-        {{categories.displayNames[$value]}}
-        <i class="glyphicons icon {{isSelected($value)}}" ></i>
+          {{categories.displayNames[$value]}}
+          <i class="checkmark-icon {{isSelected($value)}}"></i>
+
       </li>     
+
+      <li class="table-view-divider explore-select-all" v-on="click: suggestAPlace()" >
+          Suggest A Place
+
+    </li>
+
 
 
     </ul>

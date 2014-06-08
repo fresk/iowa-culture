@@ -38,21 +38,38 @@ function main(){
             markers: require('./data/markers.json'),
 
             searchResults: [],
+            selectedCategories: [],
             featuredLocations: [],
-            
-            userLocaton: null,
+
+            userLocation: null,
             showMap: false,
-            
+
             myTours: tourData,
             context: {},
         },
 
         ready: function(){
+
+            navigator.geolocation.getCurrentPosition(
+                function(position){
+                    window.app.userLocation = {
+                        'lat': position.coords.latitude,
+                        'lon': position.coords.longitude
+                    };
+                    console.log("user location", window.app.userLocation)
+                }, 
+                function onError(error) {
+                    alert('code: '+error.code + '\nmessage: ' + error.message + '\n');
+                }    
+            );        
+
             window.router.init("/"+this.currentScreen);
-            queries.findFeaturedLocations(function(err, places){
-                console.log(places);
-                app.featuredLocations = places;
-            });
+            setTimeout(function(){
+                queries.findFeaturedLocations(function(err, places){
+                    console.log(places);
+                    app.featuredLocations = places;
+                });
+            }, 1000);
 
         },
 
@@ -84,7 +101,7 @@ function onDeviceReady() {
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
+    results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 

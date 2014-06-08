@@ -14,16 +14,36 @@ module.exports = {
     "/home": function(){
         //console.log("HOME");
         //this.app.setRootView(screens.HomeScreen);
+        app.selectedCategories = [];
         window.map_reset = true;
         app.activeTab = 'home';
         window.app.currentScreen = 'home';
     },
+
+    "/suggestaplace": function(){
+        //console.log("SEARCH RESULTS");
+        //console.log(app.searchResults);
+        //screens.LocationListScreen.data.listData = app.searchResults;
+        //this.app.setRootView(screens.LocationListScreen);
+        window.app.currentScreen = 'suggest-a-place';
+    },
+
+
 
     "/search": function(){
         //console.log("SEARCH");
         //this.app.setRootView(screens.SearchScreen);
         window.app.currentScreen = 'search';
     },
+
+    "/search/limitlocation": function(){
+        //console.log("SEARCH RESULTS");
+        //console.log(app.searchResults);
+        //screens.LocationListScreen.data.listData = app.searchResults;
+        //this.app.setRootView(screens.LocationListScreen);
+        window.app.currentScreen = 'limit-location';
+    },
+
 
 
     "/search/results": function(){
@@ -72,11 +92,13 @@ module.exports = {
 
     "/tours": function(){
         console.log("TOURS");
+        app.selectedCategories = [];
         app.activeTab = 'tours';
         app.currentScreen = 'tours';
     },
 
     "/featured": function(){
+        app.selectedCategories = [];
         console.log("FEATURED");
         app.activeTab = 'featured';
         app.currentScreen = 'featured';

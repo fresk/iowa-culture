@@ -12,10 +12,10 @@ var $ = require('jquery');
 exports.findFeaturedLocations = function(cb){
     var search = {
         "query": {
-        "match" : {
-            "properties.featured" : true
-        }
-      } 
+            "match" : {
+                "properties.featured" : true
+            }
+        } 
     };
 
     searchLocations(search, cb);
@@ -28,7 +28,9 @@ exports.findLocationsWithCategory = function(categories, cb){
     var search = {
         "from": 0, "size": 50,
         "filter" : {
-            "terms" : { "properties.categories": categories }
+            "bool": {"must":[
+                {"terms" : { "properties.categories": categories }}
+            ]}
         }
     };
     searchLocations(search, cb);
@@ -40,6 +42,11 @@ exports.findLocationsWithCategory = function(categories, cb){
 exports.loadNearByMarkers = function(latlng, cb){
     var search = {
         "from": 0, "size": 50,
+        "filter" : {
+            "bool": {
+                "must": [{}]
+            }
+        },
         "sort" : [{
             "_geo_distance" : {
                 "geometry.coordinates" : {"lat" : latlng.lat, "lon" : latlng.lng},
@@ -53,20 +60,25 @@ exports.loadNearByMarkers = function(latlng, cb){
 
 
 exports.loadMarkersInBounds = function(bounds, cb){
+    console.log("refresh search", app.selectedCategories);
     var search = {
         "size": 50,
         "filter" : {
-            "geo_bounding_box" : {
-                "geometry.coordinates" : {
-                    "topRight" : {
-                        "lat" : bounds._northEast.lat,
-                        "lon" : bounds._northEast.lng
-                    },
-                    "bottomLeft" : {
-                        "lat" : bounds._southWest.lat,
-                        "lon" : bounds._southWest.lng,
-                    }
-                }
+            "bool": {
+                "must": [{
+                    "geo_bounding_box" : {
+                        "geometry.coordinates" : {
+                            "topRight" : {
+                                "lat" : bounds._northEast.lat,
+                                "lon" : bounds._northEast.lng
+                            },
+                            "bottomLeft" : {
+                                "lat" : bounds._southWest.lat,
+                                "lon" : bounds._southWest.lng,
+                            }
+                        }
+                    }   
+                }]
             }
         }
     };
@@ -77,6 +89,14 @@ exports.loadMarkersInBounds = function(bounds, cb){
 
 
 function searchLocations(search, cb){
+    console.log("SEARCH", search, window.app.selectedCategories);
+    if (window.app.selectedCategories.length > 0){
+        console.log("limiting categories",  app.selectedCategories);
+        search.filter.bool.must.push({
+            "terms" : { "properties.categories": app.selectedCategories }
+        });
+    }
+
 
     request.post("http://iowaculture.fresk.io:9200/dca/location/_search", search, function(err, resp){
 
@@ -84,11 +104,11 @@ function searchLocations(search, cb){
         _.forEach(places, function(p){
             var icon = false;
             //for( var i=0; i < p.properties.categories.length; i++){
-                //var cat = p.properties.categories[i];
-                //if (app.colors[cat]){
-                    //color = app.colors[cat];
-                    //break;
-                //}
+            //var cat = p.properties.categories[i];
+            //if (app.colors[cat]){
+            //color = app.colors[cat];
+            //break;
+            //}
             //}
             for( var i=0; i < p.properties.categories.length; i++){
                 var cat = p.properties.categories[i];
@@ -111,10 +131,9 @@ function searchLocations(search, cb){
 
 
         places = _.filter(places, function(p){
-            //console.log("filter", p.properties.icon);
             if (p.properties.icon)
                 return true;
-                //console.log("omitting", p.properties);
+            //console.log("omitting", p.properties);
         });
 
         if (window.markerLayer){
@@ -146,7 +165,7 @@ function searchLocations(search, cb){
 
         setTimeout(function(){
             $('.dca-marker').addClass('marker-fade-in')
-        
+
         }, 100);
 
 

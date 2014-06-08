@@ -328,6 +328,73 @@ body.phonegap-ios-7
 
 
 
+.limit-location-screen
+
+    .view-places-button
+        position: absolute;
+        width: 102px
+        height: 44px;
+        right: 5px;
+        bottom: 0px;
+        background-image: url("img/explore/view-places.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+
+
+    .use-current-location
+        position: absolute;
+        width: 270px;
+        height: 49px;
+        background-image: url("img/explore/current-location.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 80px;
+        left: 25px;
+
+    .limit-search-location
+        position: absolute;
+        width: 270px;
+        height: 49px;
+        background-image: url("img/explore/search-location-blank.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        top: 150px;
+        left: 25px;
+
+        input
+            position: absolute;
+            border: 0;
+            background-color: rgba(255,255,255,0.2);
+            font-size: 0.8em;
+            width: 220px;
+            left: 50px;
+            top: 4px;
+            height: 40px;
+
+
+
+.suggest-a-place-screen
+    .suggest-a-place-form
+        width: 320px;
+        height: 600px;
+        position: absolute;
+        top: 100px;
+        background-image: url("img/suggest-a-place.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    .submit-suggestion-button
+        width: 95px;
+        height: 44px;
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+        background-image: url("img/submit-suggestion-button.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+
+
+
+
 // ========================================
 // EXPLORE SCREEN
 // ========================================
@@ -345,13 +412,29 @@ body.phonegap-ios-7
   li
     position: relative
 
+  .art-cell
+    background-color: #dcf0f2 !important;
+
+  .history-cell
+    background-color: #f6e2e2 !important;
+
+  .science-cell
+    background-color: #f7e9c9 !important;
+
+
   .table-view-divider
     height: 44px
     padding-top:10px
     background-color: #edebe1;
-    font-size: 0.8em;
-    padding-left: 3em;
+    font-size: 0.7em;
+    padding-left: 50px;
     color: #340000;
+    .table-view_divider-icon
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        left: 0;
+        top: 2px;
 
   .explore-select-all
     font-style: italic;
@@ -363,20 +446,38 @@ body.phonegap-ios-7
     text-overflow: ellipsis;
     padding: 8px;
     padding-top: 10px;
-    padding-left: 1em
+    padding-left: 65px;
     transition: all 0.3s ease;
     opacity: 1.0
     height: 38px;
     position: relative;
     color: #666
     background-color: #edebe1;
+    font-size: 0.7em;
 
     &.hide
       height: 0;
-      padding: 0 ;
-      opacity: 0;
+      padding-top: 0 ;
+      padding-bottom: 0 ;
       border:0
-    
+
+  .checkmark-icon
+      display: block;
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      width: 21px;
+      height: 18px;
+      background-image: url("img/explore/checkmark-false@2x.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      &.check
+        background-image: url("img/explore/checkmark-true@2x.png");
+
+
+
+
   .glyphicons
     padding: 0
     position: absolute
