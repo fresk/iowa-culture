@@ -49,7 +49,6 @@ Vue.component('search', {
                 app.searchResults = _.pluck(res.hits.hits, "_source");
                 window.location = "/#/search/results";
             });
-
         }
     }
 });
@@ -85,7 +84,6 @@ Vue.component('explore', {
                 console.log(places);
                 app.searchResults = places;
                 window.location = "#/search/results";
-
             });
         },
 
@@ -139,6 +137,14 @@ Vue.component('explore', {
 // LOCATION LIST /////////////////////////////////////////////////
 Vue.component('location-list', {
     template: require('./views/location_list.html'),
+
+    methods: {
+    
+        addToTour: function(place){
+            console.log(JSON.stringify(place));
+        }
+    
+    }
 });
 
 
@@ -147,7 +153,6 @@ Vue.component('location-detail', {
     template: require('./views/location_detail.html'),
 
     computed: {
-    
         preview_image: function(){
             if (app.context.images.length > 0 && app.context.images[0].length > 2)
                 return app.context.images[0];
@@ -155,14 +160,11 @@ Vue.component('location-detail', {
             console.log(app.context);
             return app.context.icon.iconUrl;
         },
-
-
         preview_image_class: function(){
             if (app.context.images.length > 0 && app.context.images[0].length > 2)
                 return "icon-photo";
             return "icon-preview";
         }
-    
     }
 });
 
@@ -188,12 +190,15 @@ Vue.component('add-tour-overlay', {
     replace: true,
     data: {
         title: "",
-        color: ""
+        color: "#B4D588",
     },
     methods: {
         selectColor: function(color, ev){
             console.log(color, ev);
+            console.log(ev.target.id);
             this.color = color;
+            //$(".add-tour-color-choice").css("border",0);
+            //$(ev.target).css("border", "2px solid #fff");
             ev.preventDefault();
         },
         cancel: function(ev){
@@ -208,17 +213,10 @@ Vue.component('add-tour-overlay', {
                 places: []
             });
             this.$parent.showCreateTour = false;
+            app.saveTours();
         }
-
-
     }
-
-
 });
-
-
-
-
 
 // FEATURED /////////////////////////////////////////////////
 Vue.component('featured', {
@@ -243,7 +241,6 @@ Vue.component('map', {
     },
 
     methods: {
-
         locateUser: function(){
             map.locate({
                 watch: false,
@@ -252,11 +249,8 @@ Vue.component('map', {
                 enableHighAccuracy: true,
                 maxZoom: 16
             });
-
         }
-
     }
-
 });
 
 
@@ -316,22 +310,15 @@ function initMap(el){
 
 
 function onMapDragEnd(e){
-
     setTimeout(function(){
         queries.loadMarkersInBounds(map.getBounds(), function(err, places){
-
-
             setTimeout(function(){
                 //window.oldMarkerLookup = {};
                 _.forEach(places, function(p){
                     window.oldMarkerLookup[p.properties._id] = 1;
                 });
             },500);
-
         });
-
-
-
     },50)
 }
 
@@ -347,16 +334,6 @@ function updateUserLocation(location){
     window.userMarker.setAccuracy(location.accuracy);
 
     onMapDragEnd();
-
-    //console.log(location);
-    //map.setView(location.latlng, 15, {
-    //pan:{
-    //animate: true,
-    //duration: 1.0
-    //},
-    //zoom: {animate:true}
-    //});
-
 }
 
 
