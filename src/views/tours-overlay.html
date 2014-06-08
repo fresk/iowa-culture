@@ -8,9 +8,14 @@
         <label for="new-tour-color">Color</label>
 
         <div class="add-tour-color-choices">        
-            <button class="add-tour-color-choice" 
-                v-repeat="colors" 
-                v-style="background-color: $value" 
+            <button 
+                id = "color-choice-{{$value}}"
+                class="add-tour-color-choice" 
+                v-repeat="colors.palette" 
+                v-style="
+                    background-color: $value,  
+                    border: ($value != color)? '2px solid #fff' : '2px solid '+$value 
+                " 
                 v-on="click: selectColor($value, $event)"    
             ></button>
         </div>
