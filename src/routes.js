@@ -15,6 +15,7 @@ module.exports = {
         //console.log("HOME");
         //this.app.setRootView(screens.HomeScreen);
         window.map_reset = true;
+        app.activeTab = 'home';
         window.app.currentScreen = 'home';
     },
 
@@ -37,12 +38,14 @@ module.exports = {
         //console.log("nearme");
         //screens.MapScreen.data.listData = app.locations;
         //this.app.setRootView(screens.MapScreen);
+        app.activeTab = 'explore';
         window.app.currentScreen = 'map';
     },
 
     "/explore": function(){
         //console.log("EXPLORE");
         //this.app.setRootView(screens.ExploreScreen);
+        app.activeTab = 'explore';
         window.app.currentScreen = 'explore';
         console.log("explore");
     },
@@ -69,11 +72,13 @@ module.exports = {
 
     "/tours": function(){
         console.log("TOURS");
+        app.activeTab = 'tours';
         app.currentScreen = 'tours';
     },
 
     "/featured": function(){
         console.log("FEATURED");
+        app.activeTab = 'featured';
         app.currentScreen = 'featured';
     },
 

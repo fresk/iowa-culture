@@ -13,11 +13,16 @@
     </nav>
 
 
+    <div class="screen-menu">
+        <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
+    </div>
+
+
 
     <div class="content">
         <ul class="table-view">
             <li class="table-view-cell">
-                <a class="navigate-right" href="#/tours/favorites}}">
+                <a class="navigate-right" href="#/tours/favorites">
                     Favorites
                 </a>
             </li>

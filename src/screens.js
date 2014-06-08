@@ -20,6 +20,23 @@ Vue.component('home', {
 });
 
 
+
+// MY TOURS /////////////////////////////////////////////////
+Vue.component('screenMenuTabs', {
+    replace: true,
+    template: require('./views/screenMenuTabs.html'),
+
+    data: {
+    },
+    methods: {
+    }
+});
+
+
+
+
+
+
 // SEARCH /////////////////////////////////////////////////
 Vue.component('search', {
     template: require('./views/search.html'),
@@ -278,17 +295,14 @@ function initMap(el){
 
     // Customize each added layer
     markerLayer.on('layeradd', function(e) {
-    var marker = e.layer,
-        feature = marker.feature;
-    marker.setIcon(L.icon(feature.properties.icon));
-    console.log(marker);
-    marker._icon.className += " .marker-fade-in"; 
-});
+        var marker = e.layer;
+        marker.setIcon(L.icon(marker.properties.icon));
+        marker._icon.className += " .marker-fade-in"; 
+    });
 
     markerLayer.on('click', function(e) {
         e.layer.openPopup();
     });
-
 
 
     window.gotoUser = false;

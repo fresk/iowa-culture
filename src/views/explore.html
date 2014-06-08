@@ -1,4 +1,4 @@
-<div class="explore-screen" v-transition>
+<div class=" explore-screen " v-transition>
 
   <header class="bar bar-nav">
     <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
@@ -8,20 +8,24 @@
 
   <nav class="bar bar-tab">
     <a v-on="click: submit($event)" class="locate-btn"></a>
-  </nav>
+</nav>
+
+    <div class="screen-menu">
+        <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
+    </div>
 
   <div class="content">
 
     <ul class="table-view">
 
 
-      <li class="table-view-divider" v-on="click: toggleSelectAll('ALL', $event)" >
+      <li class="table-view-divider explore-select-all" v-on="click: toggleSelectAll('ALL', $event)" >
         Select All
         <a class="glyphicons icon {{selectAll ? 'check': 'unchecked'}}"  v-on="click: toggleSelectAll('ALL', $event)"  ></a>
     </li>
 
       <li class="table-view-divider" v-on="click: groups.art = !groups.art" >
-        Art 
+        Find Art 
         <a class="glyphicons icon {{isSelectAll('art')}}" v-on="click: toggleSelectAll('art', $event)" ></a>
       </li>
       <li class="table-view-cell {{groups.art ? '' : 'hide'}} " 
