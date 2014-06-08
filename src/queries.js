@@ -111,16 +111,35 @@ function searchLocations(search, cb){
 
 
         places = _.filter(places, function(p){
-            console.log("filter", p.properties.icon);
+            //console.log("filter", p.properties.icon);
             if (p.properties.icon)
                 return true;
                 //console.log("omitting", p.properties);
         });
 
         if (window.markerLayer){
-            window.markerLayer.setGeoJSON(places);
+            //window.markerLayer.setGeoJSON(places);
+            //
+            window.newMarkerLookup = {}
+            _.each(places, function(p){
+                //console.log(p);
+                //already added
+                if (window.oldMarkerLookup[p.properties._id]){ 
+                    window.newMarkerLookup[p.properties._id] = window.oldMarkerLookup[p.properties._id];
+                    return;
+                }
+                console.log(p)
+                var latlng = L.latLng(p.geometry.coordinates[1], p.geometry.coordinates[0]);
+                var marker = L.marker(latlng);
+                marker.properties = p.properties;
+                //console.log("MARKER", p);
+                //window.newMarkerLookup[p.properties._id] = marker;
+                marker.addTo(window.markerLayer);
+            })
+
             window.markerLayer.eachLayer(function(layer) {
-                var content = ' <h1><a href="#/location/'+layer.feature.properties._id+'">' + layer.feature.properties.title + '</a></h1>';
+                console.log("LAYER", layer);
+                var content = ' <h1><a href="#/location/'+layer.properties._id+'">' + layer.properties.title + '</a></h1>';
                 layer.bindPopup(content);
             });
         }
