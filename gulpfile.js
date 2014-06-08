@@ -95,11 +95,11 @@ gulp.task('fonts', function() {
 
 gulp.task('images', function(){
   return gulp.src('src/img/**/*')
-    .pipe(cache(imagemin({ 
-      optimizationLevel: 3, 
-      progressive: true, 
-      interlaced: true 
-    }))).on('error', handleErrors)
+    //.pipe(cache(imagemin({ 
+      //optimizationLevel: 3, 
+      //progressive: true, 
+      //interlaced: true 
+    //}))).on('error', handleErrors)
     .pipe(gulp.dest('dist/img'))
 });
 
