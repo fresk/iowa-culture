@@ -1,26 +1,29 @@
-<div class="explore-screen" v-transition>
+<div class="location-list-screen" v-transition>
 
-  <header class="bar bar-nav">
-    <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
-    <a href="#/search" class="icon icon-search pull-right back-button"></a>
-    <a href="#/home" class="header-logo"></a>
-  </header>     
+    <header class="bar bar-nav">
+        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
+        <a href="#/home" class="header-logo"></a>
+    </header>     
 
-  <nav class="bar bar-tab">
-    <a href="#/help" >
-      <div class="help"></div>
-    </a>
-  </nav>
+    <nav class="bar bar-tab">
+        <a href="#/help" >
+            <div class="help"></div>
+        </a>
+    </nav>
 
-  <div class="content">
+    <div class="content">
 
-    <ul class="table-view">
-      <li v-repeat="searchResults" class="table-view-cell">
-      <a class="navigate-right" href="#/location/{{properties._id}}">
-        {{properties.title}}
-      </a>
-      </li>
-    </ul>
+        <ul class="table-view">
+            <li v-repeat="searchResults" class="table-view-cell">
+                <a href="#/location/{{properties._id}}">
+                    {{properties.title}}
+                </a>
+                <div class="table-cell-plus-icon" v-on="click: addToTour(properties._id)"></div>
+                <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
 
-  </div>
+            </li>
+        </ul>
+
+    </div>
 </div>
