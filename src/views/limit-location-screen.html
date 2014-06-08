@@ -1,0 +1,24 @@
+<div class="limit-location-screen" v-transition>
+
+    <header class="bar bar-nav">
+        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
+        <a href="#/home" class="header-logo"></a>
+    </header> 
+
+    <nav class="bar bar-tab">
+        <div class="view-places-button" v-on="click: showSearchResults()"></div>
+    </nav>
+
+
+    <div class="content">
+
+        <div class="use-current-location" v-on="click: showNearbySearchResults"></div>
+        <div class="limit-search-location">
+            <input type="text" name="search-location" placeholder="Locate by city, zip, or county"></input>
+        </div>
+
+    </div>
+</div>
+
+
