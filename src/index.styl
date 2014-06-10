@@ -14,8 +14,10 @@
   font-family: 'Open Sans', sans-serif;
 
 
-
-
+._
+    background-color: rgba(255,0,0, 0.3);
+    border: 1px solid green;
+    
 input 
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -264,6 +266,9 @@ body.phonegap-ios-7
 .location-list-screen
   transition: all 1s 
   opacity: 1.0
+  
+  .content
+     padding-top: 88px;
   //&.v-leave 
   //  opacity: 0.0
   //&.v-enter
@@ -570,7 +575,29 @@ body.phonegap-ios-7
 
 
 .map-screen
-  size: 100% 100%
+    size: 100% 100%
+
+.toggle-map2list
+    width: 115px;
+    height: 44px;
+    position: absolute;
+    top: 0px;
+    left: 105px;
+    background-image: url("img/toggle-map2list.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+
+.toggle-list2map
+    width: 115px;
+    height: 44px;
+    position: absolute;
+    top: 0px;
+    left: 105px;
+    background-image: url("img/toggle-list2map.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
 
 
 
@@ -617,6 +644,81 @@ body.phonegap-ios-7
 .featured-screen
     .content
         padding-top: 88px;
+
+
+
+
+.add-to-tour-overlay
+    font-size: .8em;
+    position: absolute;
+    z-index: 500;
+    width: 280px;
+    left: 20px;
+    top: 150px;
+    border-radius: 10px;
+    background-color: #f9f9f1;
+    border: 1px solid #434037;
+    padding: 20px;
+    box-shadow: 0 0 10px 2px #aaa;
+    transition: all 0.2s ease-out;
+    opacity: 1.0
+    transform: scale(1);
+
+    &.v-leave 
+        opacity: 0.0
+        //transform: scale(2);
+        transform: translateY(200px);
+        
+    &.v-enter
+        opacity: 0.0 
+        transform: scale(2);
+
+    ul
+        padding: 0;
+        margin: 0;
+        margin-bottom: 20px;
+    li
+        list-style: none;
+        font-weight: 500;
+        margin: 0;
+        padding:0;
+        height: 40px;
+        border-bottom: dashed 1px #ccc;
+        position: relative;
+        //border-top: dashed 1px #ccc;
+
+    .tour-icon
+        position: absolute;
+        background-image: url("img/tour-icon.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 40px;
+        height: 40px;
+        left: 29px;
+
+    .add-to-tour-title
+        padding-left: 65px;
+        padding-top:10px;
+
+
+    .add-tour-checkbox
+        position: absolute;
+        background-image: url("img/checkbox-empty.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 8px;
+        width: 28px;
+        height: 25px;
+
+    .add-tour-checkmark
+        position: absolute;
+        background-image: url("img/checkbox-checked.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        top: 8px;
+
+        width: 28px;
+        height: 25px;
 
 
 
@@ -668,4 +770,4 @@ body.phonegap-ios-7
 
 
 .tour-form-buttom
-    font-size: 1.3em;
+    font-size: 1.0em;

@@ -1,0 +1,19 @@
+
+<div class="add-to-tour-overlay" v-transition>
+    <h4>Add to My Tour</h4>
+
+
+    <ul>
+        <li v-repeat="myTours" v-on="click: toggleTourSelection(title)">
+            <div class="add-tour-checkbox"></div>
+            <div v-show="tourIsSelected(title)" class="add-tour-checkmark"></div>
+            <div class="tour-icon"></div>
+            <div class="add-to-tour-title">{{title}}</div>
+        </li>
+    </ul>
+
+
+    <a v-on="click: cancel($event)" class="btn tour-form-buttom" type="reset">Cancel</a>
+    <a v-on="click: create($event)" class="btn tour-form-buttom" type="submit">Add</a>
+
+</div>

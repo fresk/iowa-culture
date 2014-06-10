@@ -7,10 +7,13 @@
     </header>     
 
     <nav class="bar bar-tab">
-        <a href="#/help" >
-            <div class="help"></div>
-        </a>
-    </nav>
+      <div class="toggle-list2map" v-on="click: showInMapView()"></div>
+  </nav>
+
+      <div class="screen-menu">
+        <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
+    </div>
+
 
     <div class="content">
 
@@ -21,9 +24,14 @@
                 </a>
                 <div class="table-cell-plus-icon" v-on="click: addToTour(properties._id)"></div>
                 <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
-
+    
             </li>
         </ul>
 
     </div>
+
+
+
+    <add-to-tour-overlay v-if="showAddToTour" ></add-tour-overlay>
+
 </div>

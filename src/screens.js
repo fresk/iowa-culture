@@ -25,7 +25,6 @@ Vue.component('home', {
 Vue.component('screenMenuTabs', {
     replace: true,
     template: require('./views/screenMenuTabs.html'),
-
     data: {
     },
     methods: {
@@ -134,12 +133,12 @@ Vue.component('explore', {
         },
 
         submit: function (msg, e) {
-            console.log("SUBMIT", this.selected);
+            //console.log("SUBMIT", this.selected);
             include_categories = _.keys(this.selected);
             app.selectedCategories = include_categories;
 
             queries.findLocationsWithCategory(include_categories, function(err, places){
-                console.log(places);
+                //console.log(places);
                 app.searchResults = places;
             });
             window.location = "#/search/limitlocation"
@@ -199,10 +198,21 @@ Vue.component('explore', {
 Vue.component('location-list', {
     template: require('./views/location_list.html'),
 
+    data: {
+        showAddToTour: false
+    },
+
     methods: {
     
         addToTour: function(place){
+            this.showAddToTour = true;
+            console.log(app.myToursa);
             console.log(JSON.stringify(place));
+        },
+
+        showInMapView: function(){
+            console.log("show in map");
+            app.currentScreen = 'map';
         }
     
     }
@@ -279,6 +289,32 @@ Vue.component('add-tour-overlay', {
     }
 });
 
+
+Vue.component('add-to-tour-overlay', {
+    template: require('./views/add-to-tours-overlay.html'),
+    replace: true,
+    data: {
+        selectedTours: {},
+    },
+    methods: {
+        tourIsSelected: function(title){
+            console.log("is selected?", this.selectedTours[title] );
+            return this.selectedTours[title] == true;
+        },
+        toggleTourSelection: function(title){
+            console.log("toggle", this.selectedTours[title] , !this.selectedTours[title] );
+            if(this.selectedTours[title] === undefined)
+               this.selectedTours.$add(title, false);               
+            this.selectedTours[title]  = !this.selectedTours[title] ;
+        }
+    }
+});
+
+
+
+
+
+
 // FEATURED /////////////////////////////////////////////////
 Vue.component('featured', {
     template: require('./views/featured.html'),
@@ -310,6 +346,10 @@ Vue.component('map', {
                 enableHighAccuracy: true,
                 maxZoom: 16
             });
+        },
+
+        showInListView: function(){
+            app.currentScreen = "location-list";
         }
     }
 });

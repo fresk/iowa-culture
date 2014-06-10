@@ -168,7 +168,8 @@ function searchLocations(search, cb){
 
         }, 100);
 
-
+        
+        app.searchResults = places;
         cb(null, places);
     });
 
