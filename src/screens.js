@@ -57,7 +57,22 @@ Vue.component('suggest-a-place', {
     template: require('./views/suggest-a-place.html'),
     methods: {
         submitSuggestion: function(){
+
             console.log("submitSuggestedPlace");
+            var data = {
+                title: $("#input-title").val(),
+                address: $("#input-address").val(),
+                city: $("#input-city").val(),
+                zip: $("#input-zip").val(),
+                submitter: $("#input-submitter").val(),
+            };
+
+            request.post('http://iowaculture.fresk.io:8080/app/suggest')
+                .send(data)
+                .end(function(error, res){
+                    console.log("submitted", error, res)
+                });
+
         }
     }
 });

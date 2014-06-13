@@ -23,6 +23,7 @@ function main(){
     //tours / user data is stored in loca storage
     var tourData = JSON.parse(localStorage.getItem("tours") || "[]");
 
+    var initialScreen = getParameterByName('screen') || 'home';
 
     //our main view controller
     window.app = new Vue({
@@ -30,7 +31,7 @@ function main(){
 
         data: {
             activeTab: 'home',
-            currentScreen: getParameterByName('screen') || 'home',
+            currentScreen: initialScreen,//'suggest-a-place', //getParameterByName('screen') || 'home',
 
             categories: require('./data/categories.json'),
             shades: require('./data/shades.json'),
@@ -63,13 +64,13 @@ function main(){
                 }    
             );        
 
-            window.router.init("/"+this.currentScreen);
-            setTimeout(function(){
-                queries.findFeaturedLocations(function(err, places){
-                    console.log(places);
-                    app.featuredLocations = places;
-                });
-            }, 1000);
+            //window.router.init("/"+this.currentScreen);
+            //setTimeout(function(){
+                //queries.findFeaturedLocations(function(err, places){
+                    //console.log(places);
+                    //app.featuredLocations = places;
+                //});
+            //}, 1000);
 
         },
 
