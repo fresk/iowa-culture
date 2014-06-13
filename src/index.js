@@ -24,6 +24,7 @@ function main(){
     var tourData = JSON.parse(localStorage.getItem("tours") || "[]");
 
     var initialScreen = getParameterByName('screen') || 'home';
+    console.log(initialScreen);
 
     //our main view controller
     window.app = new Vue({
@@ -64,13 +65,13 @@ function main(){
                 }    
             );        
 
-            //window.router.init("/"+this.currentScreen);
-            //setTimeout(function(){
-                //queries.findFeaturedLocations(function(err, places){
-                    //console.log(places);
-                    //app.featuredLocations = places;
-                //});
-            //}, 1000);
+            window.router.init("/"+this.currentScreen);
+            setTimeout(function(){
+                queries.findFeaturedLocations(function(err, places){
+                    console.log(places);
+                    app.featuredLocations = places;
+                });
+            }, 1000);
 
         },
 

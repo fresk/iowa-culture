@@ -29,6 +29,10 @@ module.exports = {
     },
 
 
+    "/suggestthankyou": function(){
+        window.app.currentScreen = 'thankyou';
+
+    },
 
     "/search": function(){
         //console.log("SEARCH");

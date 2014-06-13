@@ -50,28 +50,41 @@ Vue.component('limit-location', {
 });
 
 
+Vue.component('thankyou', {
+    template: require('./views/thankyou.html'),
+    methods: {
+        goHome: function(){
+            window.location = "#/home";
+        }
+    }
+});
 
 
 
 Vue.component('suggest-a-place', {
     template: require('./views/suggest-a-place.html'),
+    data: {
+        showLoadingSpinner: false
+    },
     methods: {
         submitSuggestion: function(){
-
+            this.showLoadingSpinner = true;
             console.log("submitSuggestedPlace");
             var data = {
                 title: $("#input-title").val(),
                 address: $("#input-address").val(),
                 city: $("#input-city").val(),
                 zip: $("#input-zip").val(),
-                submitter: $("#input-submitter").val(),
+                submitter_name: $("#input-submitter").val(),
             };
 
             request.post('http://iowaculture.fresk.io:8080/app/suggest')
                 .send(data)
                 .end(function(error, res){
-                    console.log("submitted", error, res)
                 });
+
+            window.location = "#/suggestthankyou";
+
 
         }
     }
