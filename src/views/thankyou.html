@@ -1,0 +1,25 @@
+<div class="thankyou-screen" v-transition>
+
+    <header class="bar bar-nav">
+        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/home" class="header-logo"></a>
+    </header> 
+
+    <nav class="bar bar-tab">
+        <div class="submit-suggestion-button" v-on="click: submitSuggestion()"></div>
+    </nav>
+
+        <div class="screen-menu">
+        <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
+    </div>
+
+
+    <div class="content" v-on="click: goHome()">
+    
+        <h1> Thank You!</h1>
+
+    </div>
+</div>
+
+
+
