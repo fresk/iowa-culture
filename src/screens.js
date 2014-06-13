@@ -5,6 +5,7 @@ var request = require("superagent");
 var es = require("elasticsearch");
 var $ = require('jquery');
 var queries = require('./queries');
+var uuid = require('uuid');
 //require('./lib/leaflet/leaflet'); //attaches to window.L
 //require('./lib/leaflet/bouncemarker'); //attaches to window.L
 //require('./lib/leaflet/leaflet.restoreview'); //attaches to window.L//
@@ -227,21 +228,55 @@ Vue.component('location-list', {
     template: require('./views/location_list.html'),
 
     data: {
-        showAddToTour: false
+        showAddToTour: false,
+        searchField: null,
+        selectedPlace: null
     },
 
     methods: {
     
         addToTour: function(place){
+            jsonData = JSON.stringify(place.$data);
+            this.selectedPlace = JSON.parse(jsonData);
             this.showAddToTour = true;
-            console.log(app.myToursa);
-            console.log(JSON.stringify(place));
+        },
+
+        sortByName: function(){
+            app.searchResults = _.sortBy(app.searchResults, function(place){
+                return place.properties.title;
+            });
+            this.hideSortMenu();
+        },
+        
+        sortByDistance: function(){
+            app.searchResults = _.sortBy(app.searchResults, function(place){
+                return place._distance;
+            });
+            this.hideSortMenu();
+
+        },
+
+        sortByCategory: function(){
+            app.searchResults = _.sortBy(app.searchResults, function(place){
+                return place.properties.icon.iconUrl;
+            });
+            this.hideSortMenu();
         },
 
         showInMapView: function(){
-            console.log("show in map");
             app.currentScreen = 'map';
+        },
+
+
+        showSortMenu: function(){
+            $(".sort-order-option-box").addClass("show-sort");
+        },
+
+        hideSortMenu: function(){
+            $(".sort-order-option-box").removeClass("show-sort");
+            console.log("hideSortMenu");
         }
+
     
     }
 });
@@ -280,9 +315,29 @@ Vue.component('tours', {
     methods: {
         createTour: function(){
             this.showCreateTour = true;
+        },
+
+        showTour: function(id){
+            window.location = "#/tours/"+id;
         }
     }
 });
+
+Vue.component('tour-list', {
+    template: require('./views/tour-list.html'),
+    methods: {
+        showDetailView: function(data, ev){
+            console.log(data.properties._id);
+            window.location = "#/location/"+data.properties._id;
+        }
+    
+    }
+});
+
+
+
+
+
 
 Vue.component('add-tour-overlay', {
     template: require('./views/tours-overlay.html'),
@@ -307,6 +362,7 @@ Vue.component('add-tour-overlay', {
         create: function(ev){
             ev.preventDefault();
             app.myTours.push({
+                id: uuid.v4(),
                 title: this.title,
                 color: this.color,
                 places: []
@@ -325,15 +381,34 @@ Vue.component('add-to-tour-overlay', {
         selectedTours: {},
     },
     methods: {
-        tourIsSelected: function(title){
-            console.log("is selected?", this.selectedTours[title] );
-            return this.selectedTours[title] == true;
+        add: function(ev){
+            ev.preventDefault();
+            this.$parent.showAddToTour = false;
+            var self = this;
+            _.each(app.myTours, function(tour){
+                if (self.tourIsSelected(tour.id)){
+                    console.log("add to tour:", tour.title,  self.$parent.selectedPlace);
+                    tour.places.push(self.$parent.selectedPlace);
+                }
+            });
+            app.saveTours();
         },
-        toggleTourSelection: function(title){
-            console.log("toggle", this.selectedTours[title] , !this.selectedTours[title] );
-            if(this.selectedTours[title] === undefined)
-               this.selectedTours.$add(title, false);               
-            this.selectedTours[title]  = !this.selectedTours[title] ;
+
+        cancel: function(ev){
+            ev.preventDefault();
+            this.$parent.showAddToTour = false;
+            this.selectedTours = {};
+        },
+
+        tourIsSelected: function(id){
+            console.log("is selected?", this.selectedTours[id] );
+            return this.selectedTours[id] == true;
+        },
+        toggleTourSelection: function(id){
+            console.log("toggle", this.selectedTours[id] , !this.selectedTours[id] );
+            if(this.selectedTours[id] === undefined)
+               this.selectedTours.$add(id, false);               
+            this.selectedTours[id]  = !this.selectedTours[id] ;
         }
     }
 });

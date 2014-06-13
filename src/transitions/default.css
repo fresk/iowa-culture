@@ -1,0 +1,28 @@
+.app-screen{
+  -webkit-transition: all 1s ease-out; 
+  -webkit-transform: translateX(0);
+  opacity: 1.0
+}
+
+.app-screen.v-leave {
+    opacity: 0.0;
+}
+
+.app-screen.v-enter {
+    opacity: 0.0;
+}
+
+
+.app-screen.slide.v-leave {
+    opacity: 1.0
+    -webkit-transform: translateX(200px);
+}
+
+.app-screen.slide.v-enter {
+    opacity: 1.0
+    -webkit-transform: translateX(-320px);
+}
+
+
+
+

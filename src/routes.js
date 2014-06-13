@@ -69,6 +69,7 @@ module.exports = {
     "/explore": function(){
         //console.log("EXPLORE");
         //this.app.setRootView(screens.ExploreScreen);
+        app.abcde = "fade";
         app.activeTab = 'explore';
         window.app.currentScreen = 'explore';
         console.log("explore");
@@ -101,6 +102,14 @@ module.exports = {
         app.currentScreen = 'tours';
     },
 
+    "/tours/:id": function(id){
+        app.tourContext = _.find(app.myTours, {"id": id});
+        console.log("context", app.tourContext);
+        app.currentScreen = 'tour-list';
+    },
+
+
+
     "/featured": function(){
         app.selectedCategories = [];
         console.log("FEATURED");
@@ -116,7 +125,8 @@ module.exports = {
             type: 'location',
             id: uid
         }, function(err, response){
-            //console.log(response._source.properties);
+            console.log(response._source);
+            
             var p = response._source;
             for( var i=0; i < p.properties.categories.length; i++){
                 var cat = p.properties.categories[i];

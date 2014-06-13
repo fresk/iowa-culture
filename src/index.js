@@ -4,6 +4,13 @@ var elasticsearch = require('elasticsearch');
 var fastclick = require('fastclick');
 var screens = require('./screens');
 var queries = require('./queries');
+var uuid = require('uuid');
+var $ = require('jquery');
+
+
+
+
+
 
 
 function main(){
@@ -21,10 +28,21 @@ function main(){
     });
 
     //tours / user data is stored in loca storage
-    var tourData = JSON.parse(localStorage.getItem("tours") || "[]");
+    var defaultTourData = [{
+        id: "favorites",
+        title: "Favorites",
+        color: "#7c6f63",
+        places: []
+    }];
+    var tourData = JSON.parse(localStorage.getItem("tours") || JSON.stringify(defaultTourData));
 
     var initialScreen = getParameterByName('screen') || 'home';
     console.log(initialScreen);
+
+
+
+
+
 
     //our main view controller
     window.app = new Vue({
@@ -32,6 +50,7 @@ function main(){
 
         data: {
             activeTab: 'home',
+            abcde: 'slide',
             currentScreen: initialScreen,//'suggest-a-place', //getParameterByName('screen') || 'home',
 
             categories: require('./data/categories.json'),
@@ -47,7 +66,11 @@ function main(){
             showMap: false,
 
             myTours: tourData,
+            activeTour: null,
+            tourContext: {},
             context: {},
+
+
         },
 
         ready: function(){
@@ -58,12 +81,19 @@ function main(){
                         'lat': position.coords.latitude,
                         'lon': position.coords.longitude
                     };
+
+                    window.app.userLatLng =  L.latLng(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    );          
                     console.log("user location", window.app.userLocation)
                 }, 
                 function onError(error) {
                     alert('code: '+error.code + '\nmessage: ' + error.message + '\n');
                 }    
-            );        
+            );   
+
+
 
             window.router.init("/"+this.currentScreen);
             setTimeout(function(){
@@ -79,13 +109,21 @@ function main(){
             saveTours: function(){
                 localStorage.setItem("tours", JSON.stringify(app.myTours));
                 console.log(localStorage.getItem('tours'));
-            }
+            },
+
+
         }
 
     });
 
+    console.log("APP", window.app);
+
+
     window.map_reset = true;
 }
+
+
+
 
 
 // Wait for device API libraries to load
@@ -114,4 +152,16 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
 } else {
     main(); //this is the browser
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

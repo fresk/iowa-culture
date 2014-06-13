@@ -4,9 +4,9 @@
 
 
     <ul>
-        <li v-repeat="myTours" v-on="click: toggleTourSelection(title)">
+        <li v-repeat="myTours" v-on="click: toggleTourSelection(id)">
             <div class="add-tour-checkbox"></div>
-            <div v-show="tourIsSelected(title)" class="add-tour-checkmark"></div>
+            <div v-show="tourIsSelected(id)" class="add-tour-checkmark"></div>
             <div class="tour-icon"></div>
             <div class="add-to-tour-title">{{title}}</div>
         </li>
@@ -14,6 +14,6 @@
 
 
     <a v-on="click: cancel($event)" class="btn tour-form-buttom" type="reset">Cancel</a>
-    <a v-on="click: create($event)" class="btn tour-form-buttom" type="submit">Add</a>
+    <a v-on="click: add($event)" class="btn tour-form-buttom" type="submit">Add</a>
 
 </div>

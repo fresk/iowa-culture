@@ -4,6 +4,7 @@ var request = require("superagent");
 var es = require("elasticsearch");
 var _ = require('lodash');
 var $ = require('jquery');
+var urlencode = require('urlencode');
 
 
 
@@ -113,6 +114,19 @@ function searchLocations(search, cb){
             for( var i=0; i < p.properties.categories.length; i++){
                 var cat = p.properties.categories[i];
                 if (app.markers[cat]){
+                    if(app.markers[cat].indexOf("art")> -1){
+                        p.properties._category = "art";
+                    }
+                    if(app.markers[cat].indexOf("history")> -1){
+                        p.properties._category = "history";
+                    }
+                    if(app.markers[cat].indexOf("science")> -1){
+                        p.properties._category = "science";
+                    }
+                    if(p.properties.featured != "false" ){
+                        console.log(p.properties.featured)
+                        p.properties._category = "featured";
+                    }
                     icon = "img/markers/64/"+app.markers[cat]+".png";
                     console.log(icon);
                     p.properties.icon = {
@@ -126,6 +140,18 @@ function searchLocations(search, cb){
                 }
             }
             p.properties.description = L.mapbox.sanitize(p.properties.description);
+    
+            if(window.app.userLatLng){
+                var latlng = L.latLng(p.geometry.coordinates[1], p.geometry.coordinates[0]);
+                p._distance = latlng.distanceTo(window.app.userLatLng);
+                p.properties._distance = (p._distance* 0.000621371).toFixed(1) ;
+            }
+            else {
+                p._distance = "";
+            }
+
+            
+
             //p.properties['marker-symbol'] = icon;
         });
 
@@ -147,9 +173,9 @@ function searchLocations(search, cb){
                     window.newMarkerLookup[p.properties._id] = window.oldMarkerLookup[p.properties._id];
                     return;
                 }
-                console.log(p)
                 var latlng = L.latLng(p.geometry.coordinates[1], p.geometry.coordinates[0]);
                 var marker = L.marker(latlng);
+
                 marker.properties = p.properties;
                 //console.log("MARKER", p);
                 //window.newMarkerLookup[p.properties._id] = marker;
@@ -157,9 +183,12 @@ function searchLocations(search, cb){
             })
 
             window.markerLayer.eachLayer(function(layer) {
-                console.log("LAYER", layer);
-                var content = ' <h1><a href="#/location/'+layer.properties._id+'">' + layer.properties.title + '</a></h1>';
-                layer.bindPopup(content);
+                console.log(layer.properties);
+                p = layer.properties;
+                var addr = urlencode(p.address1 +","+p.city+","+p.zip+",IA");
+                var content = ' <h1><a href="#/location/'+layer.properties._id+'">' + layer.properties.title + '<br/>'+layer.properties._distance+'mi</a></h1>';
+                content += '<a class="route-btn '+layer.properties._category+'" href="http://maps.apple.com/?daddr='+addr+'"></a>'
+                layer.bindPopup(content, {className: layer.properties._category});
             });
         }
 

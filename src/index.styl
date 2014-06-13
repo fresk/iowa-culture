@@ -37,15 +37,15 @@ input
   position: absolute;
   top: 0;
   z-index:0;
-  transition: transform 0.6s ease-out, opacity 1s; 
-  transform: translateX(0);
-  opacity: 1.0
-  &.v-leave 
-      transform: translateX(-200px);
-      opacity: 0.0
-  &.v-enter
-    transform: translateX(320px);
-    opacity: 1.0
+  //transition: transform 0.6s ease-out, opacity 1s; 
+  //transform: translateX(0);
+  //opacity: 1.0
+  //&.v-leave 
+  //    transform: translateX(-200px);
+  //    opacity: 0.0
+  //&.v-enter
+  //  transform: translateX(320px);
+  //  opacity: 1.0
 
 
 .app-screen > div
@@ -299,13 +299,18 @@ body.phonegap-ios-7
     a
         margin-left: 10px;
         text-overflow: ellipsis;
-        max-width: 260px;
+        max-width: 230px;
+
+    .distance-text
+        position: absolute;
+        right: 30px;
+        top: 10px;
 
     .table-cell-plus-icon
         background-image: url("img/plus-icon.png")
         background-size: contain;
         position: absolute;
-        right: 0;
+        right: -5px;
         top:0;
         height: 40px;
         width: 40px;
@@ -330,6 +335,24 @@ body.phonegap-ios-7
     font-size: 80%;
     right: 10px
     top: 5apx
+
+.sort-order-option-box
+    position: absolute;
+    bottom: -150px;
+    width: 200px;
+    background-color: #747474;
+    padding: 15px;
+    transition: all .3s ease-out;
+
+    &.show-sort
+        bottom: 44px;
+
+.sort-order-option-item
+    color: white
+    padding: 5px;
+    padding-bottom: 15px;
+    font-weight: 200;
+
 
 
 
@@ -623,6 +646,16 @@ body.phonegap-ios-7
 .map-screen
     size: 100% 100%
 
+.sort-button
+    width: 40px;
+    height: 44px;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    background-image: url("img/sort-list.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
 .toggle-map2list
     width: 115px;
     height: 44px;
@@ -786,8 +819,54 @@ body.phonegap-ios-7
 
 .mytours-screen
     .content
-        padding-top: 88px;
+        padding-top: 70px;
 
+    .table-view-cell
+        padding-left: 45px;
+        font-weight: 300;
+        text-transform: capitalize;
+        color: #796d5f;
+
+        .table-cell-marker
+            position: absolute
+            height: 25px;
+            width: 25px;
+            left:3px;
+            top:7px;;
+
+        &.tour-item-cell
+            padding-left:1em;
+            font-size: 13px
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 8px;
+            padding-top: 10px;
+            padding-left: 30px;
+            opacity: 1.0
+            height: 40px;
+            position: relative;
+            color: #666
+            background-color: #eeece2;
+
+
+
+        .distance-text
+            position: absolute;
+            right: 10px;
+            top: 10px;
+
+
+        
+        img
+            width: 40px;
+            padding: 0;
+            margin:0;
+            position: absolute;
+            top: 0;
+            left: 0px;
+
+    
 
 .add-tour-overlay
     font-size: .8em;
@@ -833,3 +912,56 @@ body.phonegap-ios-7
 
 .tour-form-buttom
     font-size: 1.0em;
+
+
+
+.leaflet-popup.science
+    .leaflet-popup-content-wrapper
+        background-color: #fcf1d6
+    .leaflet-popup-tip
+       border-top: 10px solid #fcf1d6
+
+.leaflet-popup.art
+    .leaflet-popup-content-wrapper
+        background-color: #dcf0f2
+    .leaflet-popup-tip
+        border-top: 10px solid #dcf0f2
+
+
+
+.leaflet-popup.history
+    .leaflet-popup-content-wrapper
+        background-color: #f6e2e2
+    .leaflet-popup-tip
+        border-top: 10px solid #f6e2e2
+
+.leaflet-popup-content
+    position: relative;
+    padding: 2px;
+    padding-left: 35px;
+    h1
+        padding: 2px;
+        margin:0;
+        font-size: .95em;
+        line-height: 1;
+        color: #564d44;
+    a
+        color: #564d44;
+
+    .route-btn
+        display: block;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        left: -3px;
+        top: 2px;
+        background-size: contain;
+        background-repeat: none;
+        &.art
+            background-image: url("img/nav-art.png");
+
+        &.history
+            background-image: url("img/nav-history.png");
+        &.science
+            background-image: url("img/nav-science.png");
+

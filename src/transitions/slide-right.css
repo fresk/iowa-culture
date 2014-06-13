@@ -1,0 +1,17 @@
+.app-screen{
+   -webkit-transition: all 5s ease-out; 
+  -webkit-transform: translateY(0);
+  opacity: 1.0
+}
+
+.app-screen.v-leave {
+      -webkit-transform: translateY(-200px);
+      opacity: 0.0
+}
+
+.app-screen.v-enter {
+    -webkit-transform: translateY(320px);
+    opacity: 1.0
+}
+
+

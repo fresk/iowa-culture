@@ -21,19 +21,19 @@
 
     <div class="content">
         <ul class="table-view">
-            <li class="table-view-cell">
-                <a class="navigate-right" href="#/tours/favorites">
-                    Favorites
-                </a>
-            </li>
-            <li v-repeat="myTours" class="table-view-cell" v-style="background-color: color">
+            <li v-repeat="myTours" class="table-view-cell navigate-right" v-on="click: showTour(id)" >
+                <img v-attr="src: 'img/tours/' + color.replace('#', '') +'.png'" >
                 {{title}}
             </li>
+            <li class="table-view-cell" style="font-style:italic">
+                <img v-attr="src: 'img/tours/create.png'" style="width:43px; padding-left: 5px" >
+                Create Tour
+            </li>
+
         </ul>
     </div>
 
     <add-tour-overlay v-if="showCreateTour" ></add-tour-overlay>
 
 </div>
-
 

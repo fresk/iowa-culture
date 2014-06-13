@@ -23,6 +23,8 @@
     "superagent": "^0.17.0",
     "touchclick": "^3.1.0",
     "underscore.string": "^2.3.3",
+    "urlencode": "^0.2.0",
+    "uuid": "^1.4.1",
     "vue": "git://github.com/yyx990803/vue#dev",
     "vue-touch": "0.0.1"
   },

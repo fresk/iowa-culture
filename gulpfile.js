@@ -29,6 +29,7 @@ gulp.task('build', ['html', 'browserify', 'styles', 'assets']);
 // watch
 gulp.task('watch', ['build'], function() {
     gulp.watch('src/**/*.html', ['html', 'browserify']);
+    gulp.watch('src/**/*.css', ['css']);
     gulp.watch('src/**/*.js', ['browserify']);
     gulp.watch('src/**/*.styl', ['styles']);
     gulp.watch('src/img/**/*', ['images']);
@@ -80,8 +81,13 @@ gulp.task('styles', function() {
        
 
 // images
-gulp.task('assets', ['images', 'fonts', 'lib']);
+gulp.task('assets', ['images', 'fonts', 'lib', 'css']);
 
+
+gulp.task('css', function() {
+  return gulp.src('src/**/*.css')
+    .pipe(gulp.dest('dist/'));
+});
 
 gulp.task('lib', function() {
   return gulp.src('src/lib/**/*')
