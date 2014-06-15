@@ -42,5 +42,6 @@
     "botany"                     : "marker-science-gardens",
     "science"                    : "marker-science-science",
     "zoo"                        : "marker-science-zoos",
+    "featured"                   : "marker-featured"
 
 }

@@ -582,6 +582,9 @@ body.phonegap-ios-7
   //&.v-enter
   //  opacity: 0.0 
 
+
+
+
   .images
     
     background: #777
@@ -594,12 +597,15 @@ body.phonegap-ios-7
         width: 320px;
 
       &.icon-preview
-        transform: translateY(-35px) translateX(30px)
+        transform: scale(0.85) translateY(-50px) translateX(30px)
         width: 280px
         height: 280px
 
   .info
-    padding:1em
+      padding:20px;
+      overflow:scroll;
+      min-height: 340px;
+      padding-bottom: 20px;
 
     h1
       font-size: 1em
@@ -609,25 +615,88 @@ body.phonegap-ios-7
       line-height: 1.4em
       color: #544A41
 
+
+
+    .featured-text
+        font-style: italic;
+        font-size: 0.9em;
+        font-weight: 500;
+
+    .social-icons
+      margin-top: 65px;
+      text-align: center;
+      img
+          display: inline-block;
+          width: 40px;
+
     .info-box
-      size: 100% 80px
+          
+      width: 100%
       background: #DBD7CA
-      border-radius: 4px
-      box-shadow:  0 -1px 1px #544A41;//, inset 0 -1px 1px rgba(0,0,0,0.5);
+      border-radius: 3px
+      //box-shadow:  0 -1px 1px #544A41;//, inset 0 -1px 1px rgba(0,0,0,0.5);
+      box-shadow:  inset 0px 1px 2px 2px rgba(84, 74, 65, 0.1);//, inset 0 -1px 1px rgba(0,0,0,0.5);
       margin: auto
       margin-top: 20px
+
+      img
+          width: 50px;
+          position: absolute;
+          margin: 5px;
+          margin-top: 10px;
 
       span:before
         color: #F4CD6F
         padding-left: 10px
-        font-size:
-          3em
+        font-size: 3em
+
+
       address
-        font-size: .7em
-        line-height: 1.2em
-        padding: 1em
-        margin-left: 5em
-        color: #544A41
+        font-size: .7em;
+        line-height: 1.2em;
+        padding: 1em;
+        margin-left: 60px;
+        color: #544a41;
+        display: block;
+        width: 225px;
+        padding-left: 0;
+        padding-right: 5px;
+        line-height: 1.4;
+        overflow: hidden
+
+    .contact-info
+            position: relative;
+            
+    .phone-box
+
+      padding-top: 19px;
+      height: 40px
+      width: 135px
+      position: absolute;
+      color: #544A41;
+      background: #DBD7CA
+      border-radius: 3px
+      box-shadow:  inset 0px 1px 2px 2px rgba(84, 74, 65, 0.1);//, inset 0 -1px 1px rgba(0,0,0,0.5);
+      margin-top: 15px;
+      right: 0;
+      margin-right: 1em;
+      img
+          position: absolute;
+          width: 28px;
+          top:6px;
+          left: 5px;
+      p
+          font-size: .9em;
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          letter-spacing: -1px;
+
+    .web-box
+        left: 0;
+        margin-left: 1em;
+        p
+            left: 50px
 
 
 .map-widget
@@ -714,6 +783,31 @@ body.phonegap-ios-7
     button
       font-size: 1em
 
+  .search-bg
+      position: absolute
+      left: 0;
+      top: 80px;
+      width: 320px;
+      height:63px;
+
+   input
+       position: absolute
+       left: 23px;
+       width: 210px;
+       height: 40px;
+       top: 90px;
+       background: none;
+       border:none;
+
+    button
+        position: relative;
+        left: 5px;
+        left: -4px;
+        height: 45px;
+        top: -16px;
+        width: 53px;
+        opacity: 0;
+       
 
   .result-view
     position: absolute;

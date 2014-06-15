@@ -1,45 +1,67 @@
 <div class="location-screen" v-transition>
 
-  <header class="bar bar-nav">
-    <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
-    <a href="#/search" class="icon icon-search pull-right back-button"></a>
-    <a href="#/home" class="header-logo"></a>
-  </header> 
+    <header class="bar bar-nav">
+        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
+        <a href="#/home" class="header-logo"></a>
+    </header> 
 
-  <nav class="bar bar-standard bar-footer">
-    <a class="glyphicons white dislikes pull-left"></a>
-    <a class="glyphicons white direction pull-right"></a>
-  </nav>
+    <nav class="bar bar-standard bar-footer">
+        
+        <a class="glyphicons white dislikes pull-left"></a>
+        <a href="{{context.nav_link}}" target="_system" class="glyphicons white direction pull-right"></a>
+    
+    </nav>
 
-  <div class="content">
+    <div class="content">
 
-      <div class="images" style=" background-color: {{context.icon.color}}">
-          <img v-attr="src: preview_image" class="{{preview_image_class}}" alt="">
+        <div class="images" style=" background-color: {{context.icon.color}}">
+            <img v-attr="src: preview_image" class="{{preview_image_class}}" alt="">
+        </div>
+        <div class="info">
+
+            <h1>{{context.title}}</h1>
+
+
+            <p class="featured-text" v-if="context.featured_text">
+                {{context.featured_text }}
+            </p> 
+
+            <p>
+                {{context.description  }}
+            </p> 
+
+            <div class="info-box">
+                <img v-attr="src:context.icon.iconUrl" />
+                <address>
+                    {{context.title}}<br/>
+                    {{context.address1}}<br/>
+                    {{context.city}}, {{context.state}} {{context.zip}}<br/>
+                </address>
+            </div>
+
+            
+            <div class="phone-box" v-on="click: callPhone()"> 
+                <img src="img/phone.png">
+                <p> {{context.phone}} </p>
+            </div>            
+            
+            <div class="phone-box web-box" v-on="click: openWebsite()">
+                <img src="img/web.png">
+                <p> Website </p>
+                
+            </div>
+
+            <div class="social-icons">
+                <img v-if="context.twitter" src="img/twitter@2x.png" v-on="click: openSocial('twitter')">
+                <img v-if="context.facebook" src="img/facebook@2x.png" v-on="click: openSocial('facebook')">
+            </div>            
+
+        </div>
+
+
+
+
     </div>
-    <div class="info">
-
-      <h1>{{context.title}}</h1>
-
-      <p>
-      {{context.description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "}}
-      </p> 
-
-
-    <div class="info-box">
-      <span class="glyphicons google_maps pull-left"></span>
-      <address>
-        {{context.title}}<br/>
-        {{context.address1}}<br/>
-        {{context.city}}, {{context.state}} {{context.zip}}<br/>
-      </address>
-    </div>
-
-
-    </div>
-
-
-
-
-  </div>
 </div>
 

@@ -17,7 +17,7 @@
 <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 <link rel="stylesheet" href="index.css" media="all">
-<link rel="stylesheet" href="transitions/default.css" media="all">
+<link rel="stylesheet" href="transitions.css" media="all">
 
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 </head>
@@ -25,7 +25,7 @@
 
 
     <div id="app">
-    <div v-view="currentScreen" class="app-screen {{transition}}" v-transition></div>
+    <div v-view="currentScreen" class="app-screen {{transition}}" v-ref="screen" v-transition></div>
 </div>
 <script src="bundle.js"></script>
 

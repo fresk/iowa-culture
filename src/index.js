@@ -50,7 +50,7 @@ function main(){
 
         data: {
             activeTab: 'home',
-            abcde: 'slide',
+            transition: 'slide',
             currentScreen: initialScreen,//'suggest-a-place', //getParameterByName('screen') || 'home',
 
             categories: require('./data/categories.json'),
@@ -102,6 +102,7 @@ function main(){
                     app.featuredLocations = places;
                 });
             }, 1000);
+
 
         },
 

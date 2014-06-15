@@ -115,20 +115,26 @@ Vue.component('search', {
     methods: {
         doSearch: function() {
             this.showSpinner = true;
-            var elastic_query = "http://saskavi.com:9200/dca/_search?size=2000&q=" + this.query;
+            var elastic_query = "http://saskavi.com:9200/dca/_search?size=100&q="+this.query;
             var self = this;
 
+            queries.textSearch(this.query, function(err, places){
+                self.showSpinner = false;
+                app.searchResults = places;
+                window.location = "/#/search/results";
+            });
+
             //window.es.search({
-            queries.searchLocations({
+            /*queries.searchLocations({
                 q: this.query,
                 size: 100
             }, function(err, res) {
                 //self.numHits = res.hits.total;
-                self.showSpinner = false;
                 //self.showResults = true;
-                app.searchResults = _.pluck(res.hits.hits, "_source");
+                console.log("SEARCH RESPONSE", res);
                 window.location = "/#/search/results";
             });
+           */
         }
     }
 });
@@ -285,6 +291,23 @@ Vue.component('location-list', {
 // LOCATION DETAIL /////////////////////////////////////////////////
 Vue.component('location-detail', {
     template: require('./views/location_detail.html'),
+
+    methods: {
+        callPhone: function(){
+            var choice = confirm("So you want to call "+app.context.phone+" ?");
+            if (choice)
+                window.open("tel:"+app.context.phone, '_system');
+        },
+        openWebsite: function(){
+            window.open(app.context.website, '_system');
+        },
+        openSocial: function(network){
+            window.open(app.context[network], '_system');
+        }
+    
+    },
+
+
 
     computed: {
         preview_image: function(){

@@ -1,13 +1,18 @@
 var _ = require('lodash');
 var sanitize = require('sanitize-caja');
 var request = require("superagent");
-var queries = require('./queries')
+var queries = require('./queries');
+var $ = require('jquery');
+
 
 module.exports = {
 
     "/back" : function(){
         // 2 because /back counts itself too
-        window.history.go(-2);
+        app.transition = 'slide-back';
+        setTimeout(function(){
+            window.history.go(-2);
+        }, 100);
     },
 
 
@@ -18,6 +23,7 @@ module.exports = {
         window.map_reset = true;
         app.activeTab = 'home';
         window.app.currentScreen = 'home';
+        setTimeout(function(){app.transition='slide'}, 1000);
     },
 
     "/suggestaplace": function(){
@@ -37,6 +43,13 @@ module.exports = {
     "/search": function(){
         //console.log("SEARCH");
         //this.app.setRootView(screens.SearchScreen);
+        
+        setTimeout(function(){
+            console.log("set focus");
+            $("input").focus();
+        }, 200);
+
+
         window.app.currentScreen = 'search';
     },
 
@@ -59,6 +72,7 @@ module.exports = {
     },
 
     "/nearme": function(){
+
         //console.log("nearme");
         //screens.MapScreen.data.listData = app.locations;
         //this.app.setRootView(screens.MapScreen);
@@ -69,7 +83,6 @@ module.exports = {
     "/explore": function(){
         //console.log("EXPLORE");
         //this.app.setRootView(screens.ExploreScreen);
-        app.abcde = "fade";
         app.activeTab = 'explore';
         window.app.currentScreen = 'explore';
         console.log("explore");
@@ -103,6 +116,7 @@ module.exports = {
     },
 
     "/tours/:id": function(id){
+
         app.tourContext = _.find(app.myTours, {"id": id});
         console.log("context", app.tourContext);
         app.currentScreen = 'tour-list';
@@ -120,38 +134,13 @@ module.exports = {
 
     "/location/:id": function(uid){
         console.log("LOCATION", uid);
-        app.context = window.es.get({
-            index: 'dca',
-            type: 'location',
-            id: uid
-        }, function(err, response){
-            console.log(response._source);
-            
-            var p = response._source;
-            for( var i=0; i < p.properties.categories.length; i++){
-                var cat = p.properties.categories[i];
-                if (app.markers[cat]){
-                    icon = "img/markers/512/"+app.markers[cat]+".png";
-                    console.log(icon);
-                    p.properties.icon = {
-                        "iconUrl": icon,
-                        "iconSize": [32, 32],
-                        "iconAnchor": [15, 15],
-                        "popupAnchor": [0, -20],
-                        "className": "dca-marker",
-                        "color": app.colors[cat]
-                    }
-                }
-            }
 
-
-
-
-            var data = p.properties;
-            data.description = sanitize(data.description);
-            app.context = data;
+        queries.getPlaceByID(uid, function(err, p){
+            if(err) console.log("ERROE", err, p);
+            app.context = p.properties;
             app.currentScreen = "location-detail";
         });
+
 
     }
 

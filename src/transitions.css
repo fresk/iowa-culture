@@ -1,0 +1,53 @@
+
+.app-screen {
+    -webkit-transition: all 0.1s ease-out; 
+}
+
+
+.app-screen.fade{
+  opacity: 1.0
+}
+
+.app-screen.fade.v-leave {
+    opacity: 0.0;
+}
+
+.app-screen.fade.v-enter {
+    opacity: 0.0;
+}
+
+
+.app-screen.slide {
+    -webkit-transform: translateX(0);
+}
+
+.app-screen.slide.v-leave {
+    -webkit-transform: translateX(-200px);
+}
+
+.app-screen.slide.v-enter {
+    -webkit-transform: translateX(320px);
+}
+
+
+
+
+.app-screen.slide-back {
+    opacity: 1.0;
+    -webkit-transform: translateX(0);
+}
+
+.app-screen.slide-back.v-leave {
+    opacity: 1.0;
+    -webkit-transform: translateX(320px);
+}
+
+.app-screen.slide-back.v-enter {
+    opacity: 0.0;
+    -webkit-transform: translateX(-320px);
+}
+
+
+
+
+
