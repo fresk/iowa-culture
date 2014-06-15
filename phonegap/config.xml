@@ -24,6 +24,7 @@
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
     <preference name="ios-statusbarstyle"         value="black-opaque" />   <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
     <preference name="DisallowOverscroll" value="true"/>
+    <preference name="EnableViewportScale" value="true" />
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
@@ -37,9 +38,18 @@
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
 
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
+
+
+
+
+
     <gap:platform name="ios" />
     <gap:platform name="android" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
 
 </widget>

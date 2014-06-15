@@ -39,11 +39,6 @@ function main(){
     var initialScreen = getParameterByName('screen') || 'home';
     console.log(initialScreen);
 
-
-
-
-
-
     //our main view controller
     window.app = new Vue({
         el: '#app',
@@ -69,12 +64,14 @@ function main(){
             activeTour: null,
             tourContext: {},
             context: {},
-
-
         },
 
         ready: function(){
+        
+            //window.gaPlugin = window.plugins.gaPlugin;
+            //gaPlugin.init(gaPluginSuccess, gaPluginError, "UA-51943539-1", 10);
 
+            
             navigator.geolocation.getCurrentPosition(
                 function(position){
                     window.app.userLocation = {
@@ -127,13 +124,27 @@ function main(){
 
 
 
+function gaPluginError(){
+    console.log("GOOGLA ANALYTICS ERROR:", arguments);
+}
+
+function gaPluginSuccess(){
+    console.log("GOOGLA ANALYTICS LOADED :) ", arguments);
+}
+
+
+
+
+
 // Wait for device API libraries to load
 function onDeviceReady() {
     console.log("=== DEVICE READY =========================");
+
     if (window.StatusBar){
         StatusBar.overlaysWebView(false);
         StatusBar.hide();
     }
+
     main();
 }
 
@@ -145,7 +156,6 @@ function getParameterByName(name) {
     results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
 
 // if not on an actual device...just run main (to allow testing in chrome)
 if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {

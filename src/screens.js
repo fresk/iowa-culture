@@ -294,9 +294,7 @@ Vue.component('location-detail', {
 
     methods: {
         callPhone: function(){
-            var choice = confirm("So you want to call "+app.context.phone+" ?");
-            if (choice)
-                window.open("tel:"+app.context.phone, '_system');
+            window.open("tel:"+app.context.phone, '_system');
         },
         openWebsite: function(){
             window.open(app.context.website, '_system');

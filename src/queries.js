@@ -129,7 +129,7 @@ function processResponse(resp, cb) {
                 p = layer.properties;
                 var addr = urlencode(p.address1 +","+p.city+","+p.zip+",IA");
                 var content = ' <h1><a href="#/location/'+layer.properties._id+'">' + layer.properties.title + '<br/>'+layer.properties._distance+'mi</a></h1>';
-                content += '<a class="route-btn '+layer.properties._category+'" href="http://maps.apple.com/?daddr='+addr+'" target="_system"></a>'
+                content += '<a class="route-btn '+layer.properties._category+'" href="maps:daddr='+addr+'" target="_system"></a>'
                 layer.bindPopup(content, {className: layer.properties._category});
             });
         }
@@ -190,7 +190,7 @@ exports.getPlaceByID = function(uid, callback){
         id: uid
     }, function(err, response){
         if(err) return callback(err);
-        var p = utils.assignCaytegoryAssets( response._source );
+        var p = utils.assignCategoryAssets( response._source );
         console.log("ES INDIVIDUAL RECORD", dump( response._source ), dump(p));
         callback(null, p);
        

@@ -43,7 +43,7 @@ exports.assignCategoryAssets = function(p){
     p.properties.description = L.mapbox.sanitize(p.properties.description);
 
     var addr = urlencode(p.properties.address1 +","+p.properties.city+","+p.properties.zip+",IA");
-    p.properties.nav_link =  "http://maps.apple.com/?daddr="+addr;
+    p.properties.nav_link =  "maps:daddr="+addr;
 
     if(window.app.userLatLng){
         var latlng = L.latLng(p.geometry.coordinates[1], p.geometry.coordinates[0]);
