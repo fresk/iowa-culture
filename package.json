@@ -6,9 +6,11 @@
   "description": "Fresk Base Project",
   "main": "src/main.js",
   "dependencies": {
+    "browser-sync": "^1.0.0",
     "director": "^1.2.3",
     "elasticsearch": "^2.1.4",
     "fastclick": "^1.0.1",
+    "gulp-sass": "^0.7.2",
     "jquery": "^2.1.0",
     "jsonfile": "^1.1.1",
     "leaflet": "^0.7.2",

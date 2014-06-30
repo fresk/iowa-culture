@@ -4,14 +4,14 @@
         <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
         <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
-    </header>     
+    </header>
 
     <nav class="bar bar-tab">
-      <div class="toggle-list2map" v-on="click: showInMapView()"></div>
-      <div class="sort-button" v-on="click: showSortMenu()"></div>
-  </nav>
+        <div class="toggle-list2map" v-on="click: showInMapView()"></div>
+        <div class="sort-button" v-on="click: showSortMenu()"></div>
+    </nav>
 
-      <div class="screen-menu">
+    <div class="screen-menu">
         <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
     </div>
 
@@ -21,12 +21,22 @@
         <ul class="table-view">
             <li v-repeat="searchResults" class="table-view-cell">
                 <a href="#/location/{{properties._id}}">
-                    {{properties.title}} 
+                    {{properties.title}}
                 </a>
-                <div class="table-cell-plus-icon" v-on="click: addToTour(this)"></div>
+                <div class="table-cell-plus-icon" v-on="click: addToTour($event)"></div>
                 <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
                 <div class="distance-text">{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
             </li>
+
+            <li v-if="searchResults.length == 0" class="table-view-divider explore-select-all"  >
+                No Results
+            </li>
+            <li v-if="searchResults.length == 0" class="table-view-divider explore-select-all" v-on="click: suggestAPlace()" >
+                <a class="navigate-right"> Suggest A Place </a>
+            </li>
+
+
+
         </ul>
 
     </div>

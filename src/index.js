@@ -7,19 +7,37 @@ var queries = require('./queries');
 var uuid = require('uuid');
 var $ = require('jquery');
 
+window._USER_LOCATION = undefined;
+window._USER_LATLNG = undefined;
+
+function main() {
 
 
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            window._USER_LOCATION = {
+                'lat': position.coords.latitude,
+                'lon': position.coords.longitude
+            };
+
+            window._USER_LATLNG = L.latLng(
+                position.coords.latitude,
+                position.coords.longitude
+            );
+            console.log("user location", window._USER_LOCATION);
+        },
+        function onError(error) {
+            alert('code: ' + error.code + '\nmessage: ' + error.message + '\n');
+        }
+    );
 
 
-
-
-function main(){
 
     //remove any delay between touchstart and click event
     fastclick(document.body);
 
     //router
-    window.router =  new director.Router(require('./routes'));
+    window.router = new director.Router(require('./routes'));
 
     //elastic search backend
     window.es = new elasticsearch.Client({
@@ -37,7 +55,7 @@ function main(){
     var tourData = JSON.parse(localStorage.getItem("tours") || JSON.stringify(defaultTourData));
 
     var initialScreen = getParameterByName('screen') || 'home';
-    console.log(initialScreen);
+    //console.log(initialScreen);
 
     //our main view controller
     window.app = new Vue({
@@ -46,7 +64,7 @@ function main(){
         data: {
             activeTab: 'home',
             transition: 'slide',
-            currentScreen: initialScreen,//'suggest-a-place', //getParameterByName('screen') || 'home',
+            currentScreen: initialScreen, //'suggest-a-place', //getParameterByName('screen') || 'home',
 
             categories: require('./data/categories.json'),
             shades: require('./data/shades.json'),
@@ -63,39 +81,46 @@ function main(){
             myTours: tourData,
             activeTour: null,
             tourContext: {},
+            mapMode: 'explore',
             context: {},
+            detailLocationData: {},
+            selectedLocationId: null,
+            selectedLocation: null
         },
 
-        ready: function(){
-        
+        ready: function() {
+
             //window.gaPlugin = window.plugins.gaPlugin;
             //gaPlugin.init(gaPluginSuccess, gaPluginError, "UA-51943539-1", 10);
 
-            
+            this.userLocation = window._USER_LOCATION;
+            this.userLatLng = window._USER_LAT_LNG;
             navigator.geolocation.getCurrentPosition(
-                function(position){
+                function(position) {
                     window.app.userLocation = {
                         'lat': position.coords.latitude,
-                        'lon': position.coords.longitude
+                        'lng': position.coords.longitude
                     };
 
-                    window.app.userLatLng =  L.latLng(
+                    window.app.userLatLng = L.latLng(
                         position.coords.latitude,
                         position.coords.longitude
-                    );          
-                    console.log("user location", window.app.userLocation)
-                }, 
+                    );
+                    //console.log("user location", window.app.userLocation)
+                },
                 function onError(error) {
-                    alert('code: '+error.code + '\nmessage: ' + error.message + '\n');
-                }    
-            );   
+                    alert('code: ' + error.code + '\nmessage: ' + error.message + '\n');
+                }
+            );
 
 
 
-            window.router.init("/"+this.currentScreen);
-            setTimeout(function(){
-                queries.findFeaturedLocations(function(err, places){
-                    console.log(places);
+
+
+            window.router.init("/" + this.currentScreen);
+            setTimeout(function() {
+                queries.findFeaturedLocations(function(err, places) {
+                    //console.log(places);
                     app.featuredLocations = places;
                 });
             }, 1000);
@@ -104,9 +129,9 @@ function main(){
         },
 
         methods: {
-            saveTours: function(){
+            saveTours: function() {
                 localStorage.setItem("tours", JSON.stringify(app.myTours));
-                console.log(localStorage.getItem('tours'));
+                //console.log(localStorage.getItem('tours'));
             },
 
 
@@ -114,7 +139,9 @@ function main(){
 
     });
 
-    console.log("APP", window.app);
+    //console.log("APP", window.app);
+
+
 
 
     window.map_reset = true;
@@ -124,11 +151,11 @@ function main(){
 
 
 
-function gaPluginError(){
+function gaPluginError() {
     console.log("GOOGLA ANALYTICS ERROR:", arguments);
 }
 
-function gaPluginSuccess(){
+function gaPluginSuccess() {
     console.log("GOOGLA ANALYTICS LOADED :) ", arguments);
 }
 
@@ -140,7 +167,7 @@ function gaPluginSuccess(){
 function onDeviceReady() {
     console.log("=== DEVICE READY =========================");
 
-    if (window.StatusBar){
+    if (window.StatusBar) {
         StatusBar.overlaysWebView(false);
         StatusBar.hide();
     }
@@ -153,7 +180,7 @@ function onDeviceReady() {
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
+        results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
@@ -163,16 +190,3 @@ if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/))
 } else {
     main(); //this is the browser
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

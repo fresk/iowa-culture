@@ -7,26 +7,28 @@ var $ = require('jquery');
 
 module.exports = {
 
-    "/back" : function(){
+    "/back": function() {
         // 2 because /back counts itself too
         app.transition = 'slide-back';
-        setTimeout(function(){
+        setTimeout(function() {
             window.history.go(-2);
         }, 100);
     },
 
 
-    "/home": function(){
+    "/home": function() {
         //console.log("HOME");
         //this.app.setRootView(screens.HomeScreen);
         app.selectedCategories = [];
         window.map_reset = true;
         app.activeTab = 'home';
         window.app.currentScreen = 'home';
-        setTimeout(function(){app.transition='slide'}, 1000);
+        setTimeout(function() {
+            app.transition = 'slide'
+        }, 1000);
     },
 
-    "/suggestaplace": function(){
+    "/suggestaplace": function() {
         //console.log("SEARCH RESULTS");
         //console.log(app.searchResults);
         //screens.LocationListScreen.data.listData = app.searchResults;
@@ -35,17 +37,17 @@ module.exports = {
     },
 
 
-    "/suggestthankyou": function(){
+    "/suggestthankyou": function() {
         window.app.currentScreen = 'thankyou';
 
     },
 
-    "/search": function(){
+    "/search": function() {
         //console.log("SEARCH");
         //this.app.setRootView(screens.SearchScreen);
-        
-        setTimeout(function(){
-            console.log("set focus");
+
+        setTimeout(function() {
+            // console.log("set focus");
             $("input").focus();
         }, 200);
 
@@ -53,7 +55,7 @@ module.exports = {
         window.app.currentScreen = 'search';
     },
 
-    "/search/limitlocation": function(){
+    "/search/limitlocation": function() {
         //console.log("SEARCH RESULTS");
         //console.log(app.searchResults);
         //screens.LocationListScreen.data.listData = app.searchResults;
@@ -63,80 +65,88 @@ module.exports = {
 
 
 
-    "/search/results": function(){
-        //console.log("SEARCH RESULTS");
+    "/search/results": function() {
         //console.log(app.searchResults);
         //screens.LocationListScreen.data.listData = app.searchResults;
         //this.app.setRootView(screens.LocationListScreen);
-        window.app.currentScreen = 'location-list';
+        //        app.activeTab = 'explore';
+        console.log("SEARCH RESULTS");
+        app.mapMode = 'search';
+        window.app.currentScreen = 'map';
     },
 
-    "/nearme": function(){
+    "/nearme": function() {
 
         //console.log("nearme");
         //screens.MapScreen.data.listData = app.locations;
         //this.app.setRootView(screens.MapScreen);
+        app.mapMode = 'nearme';
         app.activeTab = 'explore';
         window.app.currentScreen = 'map';
     },
 
-    "/explore": function(){
+
+    "/explore": function() {
         //console.log("EXPLORE");
         //this.app.setRootView(screens.ExploreScreen);
         app.activeTab = 'explore';
         window.app.currentScreen = 'explore';
-        console.log("explore");
+        // console.log("explore");
     },
 
-    "/explore/locate": function(){
-
-        include_categories = _.keys(app.rootView.selected);
-
-
-
-        //var result = _.filter(app.locations, function(loc){
-        //return _.any(loc.categories, function(cat){
-        //return _.contains(include_categories, cat);
-        //});
-        //});
-
-        //console.log("EXPLORE LOCATE", result, include_categories);
-
-        //screens.LocationListScreen.data.listData = result;
-        //this.app.setRootView(screens.LocationListScreen);
-        //this.app.rootView.listData = result;
-
+    "/explore/locate": function() {
+        // console.log('/explore/locate going to show map');
+        app.activeTab = 'explore';
+        app.mapMode = 'explore';
+        window.app.currentScreen = 'map';
     },
 
-    "/tours": function(){
-        console.log("TOURS");
+
+    "/tours": function() {
+        // console.log("TOURS");
         app.selectedCategories = [];
         app.activeTab = 'tours';
         app.currentScreen = 'tours';
     },
 
-    "/tours/:id": function(id){
+    "/tours/:id": function(id) {
 
-        app.tourContext = _.find(app.myTours, {"id": id});
-        console.log("context", app.tourContext);
+        app.tourContext = _.find(app.myTours, {
+            "id": id
+        });
+        // console.log("context", app.tourContext);
         app.currentScreen = 'tour-list';
     },
 
 
+    "/tour-map/:id": function() {
 
-    "/featured": function(){
+        app.tourContext = _.find(app.myTours, {
+            "id": id
+        });
+        // console.log("context", app.tourContext);
+        app.mapMode = 'tour';
+        app.currentScreen = 'map';
+    },
+
+
+
+
+
+    "/featured": function() {
         app.selectedCategories = [];
-        console.log("FEATURED");
+        // console.log("FEATURED");
         app.activeTab = 'featured';
         app.currentScreen = 'featured';
     },
 
 
-    "/location/:id": function(uid){
-        console.log("LOCATION", uid);
+    "/location/:id": function(uid) {
+        // console.log("LOCATION", uid);
 
-        queries.getPlaceByID(uid, function(err, p){
-            if(err) console.log("ERROE", err, p);
+        queries.getPlaceByID(uid, function(err, p) {
+            if (err) console.log("ERROE", err, p);
+            app.detailLocationData = p;
             app.context = p.properties;
             app.currentScreen = "location-detail";
         });
@@ -145,9 +155,3 @@ module.exports = {
     }
 
 }
-
-
-
-
-
-

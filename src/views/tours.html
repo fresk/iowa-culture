@@ -1,15 +1,14 @@
 <div class="mytours-screen" v-transition>
 
     <header class="bar bar-nav">
-        <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
-        <a v-on="click: createTour" class="icon icon-plus pull-right back-button"></a>
+        <a href=:e lmod"#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
     </header> 
 
     <nav class="bar bar-tab">
-        <a href="#/help" >
-            <div class="help"></div>
-        </a>
+        <!-- <a v-on="click: editMode" class="pull-right tours-edit-link">Edit</a> -->
+        <img v-on="click: createTour()" class="add-tour-buttom-bar" src="img/add-tour-bottom-bar.png" />
     </nav>
 
 
@@ -25,7 +24,7 @@
                 <img v-attr="src: 'img/tours/' + color.replace('#', '') +'.png'" >
                 {{title}}
             </li>
-            <li class="table-view-cell" style="font-style:italic">
+            <li class="table-view-cell" style="font-style:italic"  v-on="click: createTour()">
                 <img v-attr="src: 'img/tours/create.png'" style="width:43px; padding-left: 5px" >
                 Create Tour
             </li>

@@ -9,6 +9,8 @@
     <nav class="bar bar-standard bar-footer">
         
         <a class="glyphicons white dislikes pull-left"></a>
+
+        <div class="add-to-tours-detail-btn" v-on="click: addToTour()"></div>
         <a href="{{context.nav_link}}" target="_system" class="glyphicons white direction pull-right"></a>
     
     </nav>
@@ -31,22 +33,24 @@
                 {{context.description  }}
             </p> 
 
+            <a href="{{context.nav_link}}" target="_system">
             <div class="info-box">
                 <img v-attr="src:context.icon.iconUrl" />
-                <address>
+                    <address>
                     {{context.title}}<br/>
                     {{context.address1}}<br/>
                     {{context.city}}, {{context.state}} {{context.zip}}<br/>
                 </address>
             </div>
+        </a>
 
             
-            <div class="phone-box" v-on="click: callPhone()"> 
+            <div v-if="context.phone" class="phone-box" v-on="click: callPhone()"> 
                 <img src="img/phone.png">
                 <p> {{context.phone}} </p>
             </div>            
             
-            <div class="phone-box web-box" v-on="click: openWebsite()">
+            <div v-if="context.website" class="phone-box web-box" v-on="click: openWebsite()">
                 <img src="img/web.png">
                 <p> Website </p>
                 
@@ -60,6 +64,7 @@
         </div>
 
 
+        <add-to-tour-overlay v-if="showAddToTour" ></add-tour-overlay>
 
 
     </div>

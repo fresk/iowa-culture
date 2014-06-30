@@ -17,11 +17,11 @@
 ._
     background-color: rgba(255,0,0, 0.3);
     border: 1px solid green;
-    
-input 
+
+input
   -webkit-user-select: text;
   -moz-user-select: text;
-  -ms-user-select: text; 
+  -ms-user-select: text;
 
 
 
@@ -29,7 +29,7 @@ input
     opacity: 0.0;
     transition: opacity 1s;
 
-.marker-fade-in
+.dca-marker.marker-fade-in
     opacity: 1.0;
 
 
@@ -37,10 +37,10 @@ input
   position: absolute;
   top: 0;
   z-index:0;
-  //transition: transform 0.6s ease-out, opacity 1s; 
+  //transition: transform 0.6s ease-out, opacity 1s;
   //transform: translateX(0);
   //opacity: 1.0
-  //&.v-leave 
+  //&.v-leave
   //    transform: translateX(-200px);
   //    opacity: 0.0
   //&.v-enter
@@ -54,7 +54,7 @@ input
 
 body.phonegap-ios-7
   margin-top: 20px;
-  
+
 
 #app
   background-color: #000;
@@ -68,7 +68,7 @@ body.phonegap-ios-7
 .content
   background-color: #F0EEE5
 
-.bar 
+.bar
   background-color: #4D4D4F
   a
     color: #fff
@@ -81,7 +81,7 @@ body.phonegap-ios-7
 
 .header-logo
   img: "img/title.png"
-  center-both()     
+  center-both()
 
 .glyphicons:before
   font-size: 24px
@@ -91,7 +91,7 @@ body.phonegap-ios-7
   padding: 0
   padding-top: 10px
 
-  
+
 .screen-menu
     position: fixed;
     height: 44px;
@@ -182,7 +182,7 @@ body.phonegap-ios-7
             background-image: url("img/nav/featured-down.png");
 
 
-        
+
 
 
 // ========================================
@@ -226,11 +226,11 @@ body.phonegap-ios-7
     justify-content: space-around;
     margin-top: 10px
 
-  .sharing      
+  .sharing
     background-color: #FDFCF9
     border-radius: 10px
     padding: 10px
-    
+
 
     .share-title
       img: 'img/home/share-title.png'
@@ -264,15 +264,15 @@ body.phonegap-ios-7
 // ========================================
 
 .location-list-screen
-  transition: all 1s 
+  transition: all 1s
   opacity: 1.0
-  
+
   .content
      padding-top: 88px;
-  //&.v-leave 
+  //&.v-leave
   //  opacity: 0.0
   //&.v-enter
-  //  opacity: 0.0 
+  //  opacity: 0.0
 
   li
     position: relative
@@ -281,7 +281,7 @@ body.phonegap-ios-7
     height: 44px
     padding-top:10px
 
-  .table-view-cell 
+  .table-view-cell
     font-size: 13px
     white-space: nowrap;
     overflow: hidden;
@@ -328,7 +328,7 @@ body.phonegap-ios-7
       padding: 0 ;
       opacity: 0;
       border:0
-    
+
   .glyphicons
     padding: 0
     position: absolute
@@ -426,7 +426,7 @@ body.phonegap-ios-7
         font-size: 1.2em;
         font-weight: 200;
 
-#input-title 
+#input-title
     position: absolute;
     width: 270px;
     height: 40px;
@@ -449,9 +449,9 @@ body.phonegap-ios-7
     width: 154px;
     height: 40px;
 
-    
 
-    
+
+
 #input-zip
     position: absolute;
     top: 349px;
@@ -463,7 +463,7 @@ body.phonegap-ios-7
 #input-submitter
     position: absolute;
     top: 435px;
-    left: 25px;    
+    left: 25px;
     width: 270px;
     height: 40px;
 
@@ -473,12 +473,12 @@ body.phonegap-ios-7
 // EXPLORE SCREEN
 // ========================================
 .explore-screen
-  transition: all 1s 
+  transition: all 1s
   opacity: 1.0
-  //&.v-leave 
+  //&.v-leave
   //  opacity: 0.0
   //&.v-enter
-  //  opacity: 0.0 
+  //  opacity: 0.0
 
   .content
       padding-top: 88px;
@@ -513,7 +513,7 @@ body.phonegap-ios-7
   .explore-select-all
     font-style: italic;
 
-  .table-view-cell 
+  .table-view-cell
     font-size: 13px
     white-space: nowrap;
     overflow: hidden;
@@ -564,36 +564,46 @@ body.phonegap-ios-7
     absolute: right 10px top 8px
     &:active
       top: 9px;
-      
 
 
 
-    
+
+
 
 // ========================================
 // LOCATION DETAIL SCREEN
-// ========================================  
+// ========================================
 
 .location-screen
-  transition: all 1s 
+  transition: all 1s
   opacity: 1.0
-  //&.v-leave 
+  //&.v-leave
   ///  opacity: 0.0
   //&.v-enter
-  //  opacity: 0.0 
+  //  opacity: 0.0
 
 
+
+  .add-to-tours-detail-btn
+      position: absolute
+      width: 44px
+      height: 44px
+      left: 0;
+      bottom: 0;
+      background-image: url("img/add-tour-detail.png");
+      background-repeat: no-repeat;
+      background-size: contain;
 
 
   .images
-    
+
     background: #777
     size: 100% 140px
     overflow: hidden
     img
 
       &.icon-photo
-        transform: translateY(-25%) 
+        transform: translateY(-25%)
         width: 320px;
 
       &.icon-preview
@@ -630,7 +640,7 @@ body.phonegap-ios-7
           width: 40px;
 
     .info-box
-          
+
       width: 100%
       background: #DBD7CA
       border-radius: 3px
@@ -666,7 +676,7 @@ body.phonegap-ios-7
 
     .contact-info
             position: relative;
-            
+
     .phone-box
 
       padding-top: 19px;
@@ -709,7 +719,7 @@ body.phonegap-ios-7
 
 // ========================================
 // MAP SCREEN
-// ======================================== 
+// ========================================
 
 
 .map-screen
@@ -751,7 +761,7 @@ body.phonegap-ios-7
 
 // ========================================
 // SEARCH SCREEN
-// ======================================== 
+// ========================================
 
 .spinner
     display: block
@@ -778,7 +788,7 @@ body.phonegap-ios-7
   .content
     padding: 20px;
     padding-right: 20px;
-    padding-top: 104px;
+    padding-top: 44px;
 
     button
       font-size: 1em
@@ -792,22 +802,33 @@ body.phonegap-ios-7
 
    input
        position: absolute
-       left: 23px;
-       width: 210px;
-       height: 40px;
-       top: 90px;
+       width: 240px;
+       height: 85px;
        background: none;
        border:none;
+       top: 86px;
+       width: 250x;
+       padding: 0;
+       padding-left:1em;
+       height: 50px;
+       left: 20px;
+       width: 220px;
+
+
+
+
+
+
 
     button
         position: relative;
         left: 5px;
         left: -4px;
         height: 45px;
-        top: -16px;
+        top: 44px;
         width: 53px;
         opacity: 0;
-       
+
 
   .result-view
     position: absolute;
@@ -827,7 +848,7 @@ body.phonegap-ios-7
 
 // ========================================
 // SEARCH SCREEN
-// ======================================== 
+// ========================================
 
 
 .featured-screen
@@ -853,13 +874,13 @@ body.phonegap-ios-7
     opacity: 1.0
     transform: scale(1);
 
-    &.v-leave 
+    &.v-leave
         opacity: 0.0
         //transform: scale(2);
         transform: translateY(200px);
-        
+
     &.v-enter
-        opacity: 0.0 
+        opacity: 0.0
         transform: scale(2);
 
     ul
@@ -886,9 +907,23 @@ body.phonegap-ios-7
         left: 29px;
 
     .add-to-tour-title
-        padding-left: 65px;
+        padding-left: 35px;
         padding-top:10px;
+        text-transform: capitalize;
 
+    .add-new-tour-icon
+        position: absolute;
+        background-image: url("img/add-new-tour.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 32px;
+        height: 32px;
+        left: 4px;
+        top: 5px;
+
+    .add-to-tour-create-title
+        padding-left: 35px;
+        padding-top:10px;
 
     .add-tour-checkbox
         position: absolute;
@@ -930,18 +965,34 @@ body.phonegap-ios-7
 
         &.tour-item-cell
             padding-left:1em;
-            font-size: 13px
+            font-size: 12px
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             padding: 8px;
             padding-top: 10px;
-            padding-left: 30px;
+            padding-left: 33px;
+            padding-right: 60px
             opacity: 1.0
             height: 40px;
             position: relative;
             color: #666
             background-color: #eeece2;
+            opacity: 1.0;
+            //transition: transform 2s linear 1s;
+            //transform: scale3d(1,1,1);
+            transition: height .6s, padding .5s, opacity .6s
+            &.v-enter
+              height: 0;
+              padding: 0;
+              //transform: scale3d(1,0,1);
+              opacity: 0.0
+            &.v-leave
+              //transform: scale3d(1,0,1);
+              height: 0;
+              padding: 0;
+              opacity: 0.0
+
 
 
 
@@ -951,7 +1002,7 @@ body.phonegap-ios-7
             top: 10px;
 
 
-        
+
         img
             width: 40px;
             padding: 0;
@@ -960,7 +1011,9 @@ body.phonegap-ios-7
             top: 0;
             left: 0px;
 
-    
+
+.tours-edit-link
+    padding: 1em;
 
 .add-tour-overlay
     font-size: .8em;
@@ -978,13 +1031,13 @@ body.phonegap-ios-7
     opacity: 1.0
     transform: scale(1);
 
-    &.v-leave 
+    &.v-leave
         opacity: 0.0
         //transform: scale(2);
         transform: translateY(200px);
-        
+
     &.v-enter
-        opacity: 0.0 
+        opacity: 0.0
         transform: scale(2);
 
 .add-tour-color-choices
@@ -995,9 +1048,19 @@ body.phonegap-ios-7
 .add-tour-color-choice
     border: 0;
     border-radius: 2px;
-    size: 27px 30px;
+    //size: 27px 30px;
+    width: 30px;
+    height: 30px;
     max-width: 27px;
+    padding: 0;
 
+
+.add-tour-buttom-bar
+    width: 55px;
+    height: 44px;
+    position: absolute;
+    bottom:2px;
+    right:3px;
 
 
 .add-tour-color-choice.selected
@@ -1031,12 +1094,12 @@ body.phonegap-ios-7
 
 .leaflet-popup-content
     position: relative;
-    padding: 2px;
+    padding: 5px;
     padding-left: 35px;
     h1
         padding: 2px;
         margin:0;
-        font-size: .95em;
+        font-size: 1em;
         line-height: 1;
         color: #564d44;
     a
@@ -1044,11 +1107,11 @@ body.phonegap-ios-7
 
     .route-btn
         display: block;
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         position: absolute;
         left: -3px;
-        top: 2px;
+        top: 5px;
         background-size: contain;
         background-repeat: none;
         &.art
@@ -1058,4 +1121,96 @@ body.phonegap-ios-7
             background-image: url("img/nav-history.png");
         &.science
             background-image: url("img/nav-science.png");
+
+
+
+
+
+.edit-tour-btn
+    //background-color: #f00;
+    background-image: url('img/edit-brown.png');
+    background-size: contain;
+    background-repeat: none;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    top: 2px;;
+
+    transition: all 1s;
+    transform: translate3D(30,0,0);
+
+
+    &.v-enter
+        transform: translate3D(50px,0,0);
+    &.v-leave
+        transform: translate3D(50px,0,0);
+
+
+
+.tour-item-remove-btn
+    background-color: #f00;
+    background-image: url('img/remove-circle.png');
+    background-size: contain;
+    width: 26px;
+    height: 30px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+
+    transition: all 1s;
+    transform: translate3D(30,0,0);
+
+
+    &.v-enter
+        transform: translate3D(50px,0,0);
+    &.v-leave
+        transform: translate3D(50px,0,0);
+
+
+
+.mytours-screen .table-view-cell .distance-text
+    transition: all 1s;
+    transform: translate3D(30,0,0);
+
+
+    &.v-enter
+        transform: translate3D(50px,0,0);
+    &.v-leave
+        transform: translate3D(50px,0,0);
+
+.edit-buttom-bar
+    width: 55px;
+    height: 44px;
+    position: absolute;
+    bottom:4px;
+    right:3px;
+
+
+ul
+  background-color: #f0eee5
+
+
+.edit-tour-delete-circle
+    background-image: url('img/delete-circle.png');
+    background-size: contain;
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    right: 16px;
+    top: 17px;
+
+
+.add-tour-overlay input
+  padding-left:6px;
+
+.add-to-tour-overlay li
+  background-color: #f9f9f1;
+
+.limit-location-search-btn
+  position: absolute;
+  height: 48px;
+  opacity: 0.01;
+
+
 

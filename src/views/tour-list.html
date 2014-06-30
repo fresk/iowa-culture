@@ -2,13 +2,15 @@
 
     <header class="bar bar-nav">
         <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
+        <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
     </header>     
 
     <nav class="bar bar-tab">
       <div class="toggle-list2map" v-on="click: showInMapView()"></div>
       <div class="sort-button" v-on="click: showSortMenu()"></div>
-  </nav>
+      <img v-on="click: toggleEditMode()" class="edit-buttom-bar" src="img/edit-bottom-bar.png" />
+    </nav>
 
       <div class="screen-menu">
         <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
@@ -18,24 +20,36 @@
     <div class="content">
 
         <ul class="table-view">
-             <li class="table-view-cell" style="background-color: #cfc5b7; font-weight: 600">
+             <li class="table-view-cell" style="background-color: #cfc5b7; font-weight: 600; min-height: 44px">
                  <img v-attr="src: 'img/tours/' + tourContext.color.replace('#', '') +'.png'" >
-                {{tourContext.title}}
+                 {{tourContext.title}}
+
+                 <div v-show="editMode == true" v-if="tourContext.id != 'favorites' "  v-on="click: editTour()" class="edit-tour-btn" v-transition></div>
             </li>
 
 
 
             <li v-repeat="tourContext.places" class="table-view-cell tour-item-cell" 
-                v-on="click: showDetailView(this.$data, $ev)">
+                v-on="click: showDetailView(properties._id, $event)"
+                v-transition>
                 {{properties.title}} 
                 <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
-                <div class="distance-text">{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
+                <div v-show="editMode == false" class="distance-text" v-transition>{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
+                
+                <div v-show="editMode == true" 
+                    v-on="click: deleteFromTour(this.$data, $event)" 
+                    class="tour-item-remove-btn" v-transition></div>
             </li>
         </ul>
 
     </div>
 
+    <div class="sort-order-option-box">
+        <div class="sort-order-option-item" v-on="click:sortByName()">Sort Alphabetical</div>
+        <div class="sort-order-option-item" v-on="click:sortByDistance()">Sort By Distance</div>
+        <div class="sort-order-option-item" v-on="click:sortByCategory()">Sort By Category</div>
+    </div>
 
-
+    <edit-tour-overlay v-if="showEditTour" v-with="tourContext"></edit-tour-overlay>
 
 </div>

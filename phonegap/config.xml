@@ -51,5 +51,6 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="com.testflightapp.cordova-plugin" />
 
 </widget>
