@@ -18,12 +18,10 @@
     background-color: rgba(255,0,0, 0.3);
     border: 1px solid green;
 
-input
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
 
-
+input[type="text"] {
+    -webkit-user-select: text;
+}
 
 .dca-marker
     opacity: 0.0;
@@ -66,7 +64,8 @@ body.phonegap-ios-7
     size: 100% 100%
 
 .content
-  background-color: #F0EEE5
+  background-color: #eeece3 //#F0EEE5
+
 
 .bar
   background-color: #4D4D4F
@@ -305,6 +304,9 @@ body.phonegap-ios-7
         position: absolute;
         right: 30px;
         top: 10px;
+        font-size: 11px;
+        opacity: .3;
+
 
     .table-cell-plus-icon
         background-image: url("img/plus-icon.png")
@@ -1000,6 +1002,8 @@ body.phonegap-ios-7
             position: absolute;
             right: 10px;
             top: 10px;
+            font-size: 11px;
+            opacity: .3;
 
 
 
@@ -1121,6 +1125,8 @@ body.phonegap-ios-7
             background-image: url("img/nav-history.png");
         &.science
             background-image: url("img/nav-science.png");
+        &.featured
+            background-image: url("img/nav-featured.png");
 
 
 
@@ -1213,4 +1219,83 @@ ul
   opacity: 0.01;
 
 
+.featured-screen .content
+  padding-top: 44px;
+
+
+
+.featured-screen .content > .table-view:first-child
+  margin:0
+  padding: 0
+  margin-top: 44px;
+
+
+.featured-table-divider
+  color: #564d44;
+  background-image: url('img/table-header-bg.png');
+  background-color: #cfc5b7;
+  font-weight: 600;
+  min-height: 44px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  padding-top: 11px;
+  padding-left: 1em;
+  font-weight: 700;
+
+
+.featured-screen .table-view-cell
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px;
+  padding-top: 10px;
+  padding-left: 1em;
+  background-color: #eeece2;
+
+
+.featured-screen .table-view-cell a
+  max-width: 220px;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 10px;
+
+
+
+
+.distance-text
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    font-size: 11px;
+    opacity: .3;
+
+.table-cell-plus-icon
+    background-image: url("img/plus-icon.png")
+    background-size: contain;
+    position: absolute;
+    right: -5px;
+    top:0;
+    height: 40px;
+    width: 40px;
+
+.table-cell-marker
+    position: absolute
+    height: 25px;
+    left:3px;
+    top:7px;
+
+.featured-screen .table-view-cell.featured-tour-cell
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 600;
+
+  a
+    max-width: 280px;
+
+  .table-cell-marker
+    top:6px;
+    height: 28px
 

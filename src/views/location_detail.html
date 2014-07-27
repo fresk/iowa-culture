@@ -4,15 +4,14 @@
         <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
         <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
-    </header> 
-
+    </header>
     <nav class="bar bar-standard bar-footer">
-        
+
         <a class="glyphicons white dislikes pull-left"></a>
 
         <div class="add-to-tours-detail-btn" v-on="click: addToTour()"></div>
         <a href="{{context.nav_link}}" target="_system" class="glyphicons white direction pull-right"></a>
-    
+
     </nav>
 
     <div class="content">
@@ -27,11 +26,13 @@
 
             <p class="featured-text" v-if="context.featured_text">
                 {{context.featured_text }}
-            </p> 
+            </p>
 
             <p>
                 {{context.description  }}
-            </p> 
+            </p>
+
+            <p v-if="context.public == false" > <i>This property is privately owned and not open to the public. Please respect the privacy of owners if you visit. </i></p>
 
             <a href="{{context.nav_link}}" target="_system">
             <div class="info-box">
@@ -39,27 +40,29 @@
                     <address>
                     {{context.title}}<br/>
                     {{context.address1}}<br/>
+                    <span v-if="context.address2">{{context.address2}}<br/></span>
                     {{context.city}}, {{context.state}} {{context.zip}}<br/>
+                    <i>{{context.county}</i>
                 </address>
             </div>
         </a>
 
-            
-            <div v-if="context.phone" class="phone-box" v-on="click: callPhone()"> 
+
+            <div v-if="context.phone" class="phone-box" v-on="click: callPhone()">
                 <img src="img/phone.png">
                 <p> {{context.phone}} </p>
-            </div>            
-            
+            </div>
+
             <div v-if="context.website" class="phone-box web-box" v-on="click: openWebsite()">
                 <img src="img/web.png">
                 <p> Website </p>
-                
+
             </div>
 
             <div class="social-icons">
                 <img v-if="context.twitter" src="img/twitter@2x.png" v-on="click: openSocial('twitter')">
                 <img v-if="context.facebook" src="img/facebook@2x.png" v-on="click: openSocial('facebook')">
-            </div>            
+            </div>
 
         </div>
 

@@ -5,14 +5,14 @@
   </header>
 
   <nav class="bar bar-tab">
-    <a class="help" href="#help"></a>
+    <a class="help" href="#/help"></a>
 </nav>
 
 
 
 
   <div class="content">
-    
+
    <div class="btn-layout">
     <a href="#/explore" class="btn-explore"></a>
     <a href="#/nearme" class="btn-nearme"></a>
@@ -23,7 +23,7 @@
     <a href="#/featured" class="btn-featured"></a>
   </div>
 
-   <div class="share-layout">
+   <div class="share-layout" v-on="click: share()">
     <div class="sharing">
       <div class="share-title"></div>
       <div class="share-buttons">

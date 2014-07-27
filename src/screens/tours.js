@@ -54,7 +54,7 @@ Vue.component('tour-list', {
             _.pull(app.tourContext.places, item);
             app.tourContext.places = _.filter(app.tourContext.places, function(p) {
                 return p != item;
-            })
+            });
             //console.log("SAVE TOUR DATA");
             app.saveTours();
 

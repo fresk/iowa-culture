@@ -15,7 +15,7 @@
 
         <div class="use-current-location" v-on="click: showNearbySearchResults()"></div>
         <div class="limit-search-location">
-            <input type="text" name="search-location" placeholder="Locate by city, zip, or county" v-model="query"
+            <input type="text" name="search-location" placeholder="Locate by city, or county" v-model="query"
             v-on="
                 blur: showQuerySearchResults($event),
                 keyup: showQuerySearchResults($event) | key enter

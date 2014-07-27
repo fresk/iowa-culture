@@ -4,13 +4,16 @@
         <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
         <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
-    </header> 
+    </header>
 
     <nav class="bar bar-tab">
-        <a href="#/help" >
-            <div class="help"></div>
-        </a>
+        <div class="toggle-list2map" v-on="click: showInMapView()"></div>
+        <div class="sort-button" v-on="click: showSortMenu()"></div>
     </nav>
+
+    <div class="screen-menu">
+        <div v-component="screenMenuTabs" class="screen-menu-tabs" v-show="currentScreen != 'home' " v-transition></div>
+    </div>
 
 
     <div class="content">
@@ -18,28 +21,48 @@
         <ul class="table-view">
 
             <li class="table-view-divider featured-table-divider" >
+                Tours
+            </li>
+
+            <li v-repeat="featuredTourList" class="table-view-cell featured-tour-cell">
+                <a  href="#/feature_tour/{{slug}}">
+                    {{title}}
+                </a>
+                <div class="table-cell-plus-icon" v-on="click: addFeaturedTour($event)"></div>
+                <img class="table-cell-marker" src="img/markers/512/marker-featured.png">
+            </li>
+
+            <li class="table-view-divider featured-table-divider" >
                 Places
             </li>
 
             <li v-repeat="featuredLocations" class="table-view-cell">
-                <a class="navigate-right" href="#/location/{{properties._id}}">
+                <a href="#/location/{{properties._id}}">
                     {{properties.title}}
                 </a>
+                <div class="table-cell-plus-icon" v-on="click: addToTour($event)"></div>
+                <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
+                <div class="distance-text">{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
             </li>
 
-
-            <li class="table-view-divider featured-table-divider" >
-                Tours
-            </li>
-            <li class="table-view-cell">
-                    TODO
-            </li>
 
 
 
 
         </ul>
 
+
     </div>
+
+
+
+    <div class="sort-order-option-box">
+        <div class="sort-order-option-item" v-on="click:sortByName()">Sort Alphabetical</div>
+        <div class="sort-order-option-item" v-on="click:sortByDistance()">Sort By Distance</div>
+        <div class="sort-order-option-item" v-on="click:sortByCategory()">Sort By Category</div>
+    </div>
+
+
+    <add-to-tour-overlay v-if="showAddToTour" ></add-tour-overlay>
 </div>
 

@@ -5,7 +5,7 @@ var es = require("elasticsearch");
 var _ = require('lodash');
 var $ = require('jquery');
 var urlencode = require('urlencode');
-var utils = require('./utils')
+var utils = require('./utils');
 
 
 
@@ -13,8 +13,9 @@ var utils = require('./utils')
 
 exports.findFeaturedLocations = function(cb) {
     var search = {
-        "query": {
-            "match": {
+        "size": 50,
+        "filter": {
+            "term": {
                 "properties.featured": true
             }
         }
@@ -23,6 +24,23 @@ exports.findFeaturedLocations = function(cb) {
     searchLocations(search, cb);
 
 };
+
+
+exports.findFeaturedTour = function(slug, cb) {
+    var search = {
+        "size": 100,
+        "filter": {
+            "term": {
+                "properties.featured_tour": slug
+            }
+        }
+    };
+
+    searchLocations(search, cb);
+
+};
+
+
 
 
 
@@ -102,7 +120,7 @@ exports.loadNearByMarkers = function(latlng, cb) {
 exports.loadMarkersInBounds = function(bounds, cb) {
     // console.log("refresh search", app.selectedCategories);
     var search = {
-        "size": 50,
+        "size": 100,
         "filter": {
             "bool": {
                 "must": [{
@@ -140,6 +158,8 @@ function processResponse(resp, cb) {
 
 
     places = _.filter(places, function(p) {
+        if (p.properties.categories[0] == "")
+            return false;
         if (p.properties.icon)
             return true;
         //console.log("omitting", p.properties);
@@ -167,7 +187,7 @@ function processResponse(resp, cb) {
 
 
 exports.textSearch = function(q, cb) {
-    var url = "http://iowaculture.fresk.io:9200/_search?size=50&q=" + encodeURIComponent(q);
+    var url = "http://iowaculture.fresk.io:9200/_search?size=100&q=" + encodeURIComponent(q);
     request.get(url)
         .end(function(err, resp) {
             processResponse(resp, cb);

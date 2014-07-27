@@ -13,12 +13,22 @@ require('./map');
 require('./tours');
 
 
-
-
-
 // HOME /////////////////////////////////////////////////
 Vue.component('home', {
-    template: require('../views/home.html')
+    template: require('../views/home.html'),
+    methods: {
+        share: function() {
+            window.plugins.socialsharing.share(
+                'Check out the Iowa Culture app',
+                null,
+                null,
+                'http://iowacultureapp.com');
+        }
+    }
+});
+
+Vue.component('help', {
+    template: require('../views/help.html')
 });
 
 
@@ -43,18 +53,23 @@ Vue.component('search', {
         this.showSpinner = false;
         this.showResults = false;
         var self = this;
+
         setTimeout(function() {
-            self.setFocus();
-        }, 1000);
+            $('input').on('touchstart', function() {
+                $(this).focus(); // inside this function the focus works
+            });
+
+            setTimeout(function() {
+                $('input').trigger('touchstart');
+            }, 100);
+
+        }, 100);
     },
 
     methods: {
-        setFocus: function(ev) {
-            console.log("set focus");
-            $('.search-input').focus();
-        },
 
-        doSearch: function(ev) {
+        doSearchKey: function(ev) {
+            //alert('key search');
             if (ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
@@ -64,11 +79,31 @@ Vue.component('search', {
             var self = this;
 
             queries.textSearch(this.query, function(err, places) {
+                //alert("got text search results", places.length);
+                self.showSpinner = false;
+                app.searchResults = places;
+                window.location = "#/search/results";
+            });
+        },
+
+        doSearchBlur: function(ev) {
+            //alert('blur search');
+            if (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+            }
+            this.showSpinner = true;
+            //var elastic_query = "http://saskavi.com:9200/dca/_search?size=100&q=" + this.query;
+            var self = this;
+
+            queries.textSearch(this.query, function(err, places) {
+                //alert("got text search results", places.length);
                 self.showSpinner = false;
                 app.searchResults = places;
                 window.location = "#/search/results";
             });
         }
+
     }
 });
 

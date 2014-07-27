@@ -35,11 +35,13 @@ Vue.component('explore', {
             include_categories = _.keys(this.selected);
             app.selectedCategories = include_categories;
 
-            queries.findLocationsWithCategory(include_categories, function(err, places) {
-                //console.log(places);
-                app.searchResults = places;
-            });
-            window.location = "#/search/limitlocation"
+            // queries.findLocationsWithCategory(include_categories, function(err, places) {
+            //     //console.log(places);
+            //     app.searchResults = places;
+
+            // });
+            window.location = "#/search/limitlocation";
+
         },
 
         toggle: function(category) {
@@ -60,9 +62,9 @@ Vue.component('explore', {
             // console.log('toggle select all', group);
             if (group === "ALL") {
                 this.selectAll = !this.selectAll;
-                this.groupSelectAll['art'] = false;
-                this.groupSelectAll['history'] = false;
-                this.groupSelectAll['science'] = false;
+                // this.groupSelectAll['art'] = false;
+                // this.groupSelectAll['history'] = false;
+                // this.groupSelectAll['science'] = false;
                 this.toggleSelectAll('art');
                 this.toggleSelectAll('history');
                 this.toggleSelectAll('science');
@@ -75,11 +77,11 @@ Vue.component('explore', {
             if (this.groupSelectAll[group]) {
                 _.forEach(this.categories[group], function(c) {
                     this.selected.$add(c, true);
-                }, this)
+                }, this);
             } else {
                 _.forEach(this.categories[group], function(c) {
                     this.selected.$delete(c);
-                }, this)
+                }, this);
             }
             if (ev) {
                 ev.stopPropagation();
@@ -101,21 +103,26 @@ Vue.component('limit-location', {
     },
     methods: {
         showSearchResults: function(ev) {
-            console.log("SEARCH RESULTS");
+            //console.log("SEARCH RESULTS");
             if (ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
             }
             // console.log("show search results");
             //window.location = "#/nearme";
-            var bounds = L.latLngBounds([40, -97], [44, -90]);;
+
+
+            var bounds = L.latLngBounds([38.145, -96.965], [45.95, -89.934]);
             queries.loadMarkersInBounds(bounds, function(err, places) {
-                // console.log("QUERY", places);
                 this.showSpinner = false;
-                // console.log('settoing location', '/#/explore/locate');
-                window.location = '/#/explore/locate';
+                window.location = '#/explore/locate';
             });
         },
+
+
+
+
+
         showQuerySearchResults: function() {
             console.log("QUERY RESULTS");
             // console.log("show search results");
@@ -130,6 +137,7 @@ Vue.component('limit-location', {
                 })
                 .end(function(res) {
                     //console.log(res.body);
+                //alert("mapquest", res.body);
                     if (res.body.length == 0) {
                         return;
                     }
@@ -142,25 +150,30 @@ Vue.component('limit-location', {
                             [b[1], b[3]]
                         ]);
                         //console.log("search within", bounds.isValid(), bounds);
-
+                        //alert("bounded query");
                         queries.loadMarkersInBounds(bounds, function(err, places) {
                             //console.log("QUERY", places);
+                            //alert("bounded query results", window.location);
                             this.showSpinner = false;
                             //console.log('settoing location', '/#/explore/locate')
-                            window.location = '/#/explore/locate';
+                            window.location = '#/explore/locate';
                         });
-                        return
                     }
                 });
             //window.location = "#/nearme";
         },
-        showNearbySearchResults: function() {
-            console.log("NEARBY RESULTS");
+        showNearbySearchResults: function(ev) {
+            if (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+            }
             this.showSpinner = true;
+            var self = this;
 
-            queries.loadNearByMarkers(app.userLocation, function() {
-                this.showSpinner = false;
-                window.location = '/#/explore/locate';
+            queries.loadNearByMarkers(app.userLocation, function(err, places) {
+                self.showSpinner = false;
+                app.searchResults = places;
+                window.location = '#/explore/locate';
                 //window.location = "#/nearme";
             });
             //console.log("show search results");

@@ -15,11 +15,23 @@
     <img src="img/search-input.png" class="search-bg"/>
     <input type="text" v-model="query" class="form-control search-input"
       v-on="
-      blur: doSearch($event),
-      keyup: doSearch($event) | key enter
+        blur: doSearchBlur($event),
+        keyup: doSearchKey($event) | key enter
+      "
+
+      style="
+        background-color: #e7e1d5;
+        color: #7c6f63;
+        top: 88px;
+        left: 20px;
+        border-radius: 0px;
+        height: 45px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        width: 220px;
       "
     >
-    <button v-on="click: doSearch" class="btn pull-right">Search</button>
+    <button  class="btn pull-right">Search</button>
     <!--<button class="btn btn_search"><span class="icon icon-search"></span></button>-->
     <img v-show="showSpinner" class="spinner" src="./img/loading.gif">
   </div>

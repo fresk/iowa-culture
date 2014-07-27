@@ -7,6 +7,13 @@ var $ = require('jquery');
 
 module.exports = {
 
+    "/help": function() {
+        // 2 because /back counts itself too
+        //app.transition = 'slide-back';
+        window.app.currentScreen = 'help';
+    },
+
+
     "/back": function() {
         // 2 because /back counts itself too
         app.transition = 'slide-back';
@@ -96,7 +103,8 @@ module.exports = {
 
     "/explore/locate": function() {
         // console.log('/explore/locate going to show map');
-        app.activeTab = 'explore';
+        //app.activeTab = 'explore';
+        //alert("explore locate");
         app.mapMode = 'explore';
         window.app.currentScreen = 'map';
     },
@@ -136,8 +144,30 @@ module.exports = {
     "/featured": function() {
         app.selectedCategories = [];
         // console.log("FEATURED");
-        app.activeTab = 'featured';
-        app.currentScreen = 'featured';
+        //app.searchResults = app.featuredLocations;
+        queries.findFeaturedLocations(function(err, places) {
+            app.featuredLocations = places;
+            app.activeTab = 'featured';
+            app.currentScreen = 'featured';
+        });
+
+    },
+
+
+
+    "/feature_tour/:slug": function(slug) {
+        app.selectedCategories = [];
+        // console.log("FEATURED");
+        //app.searchResults = app.featuredLocations;
+        app.selectedFeaturedTour = _.find(app.featuredTourList, function(t) {
+            return t.slug == slug;
+        });
+        queries.findFeaturedTour(slug, function(err, places) {
+            app.featuredLocations = places;
+            app.activeTab = 'featured';
+            app.currentScreen = 'featured-tour';
+        });
+
     },
 
 

@@ -42,7 +42,15 @@
         <param name="ios-package" value="CDVInAppBrowser" />
     </feature>
 
+<!-- for iOS -->
+<feature name="SocialSharing">
+  <param name="ios-package" value="SocialSharing" />
+</feature>
 
+<!-- for Android -->
+<feature name="SocialSharing">
+  <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+</feature>
 
 
 
@@ -51,6 +59,6 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="com.testflightapp.cordova-plugin" />
+    <gap:plugin name="nl.x-services.plugins.socialsharing" />
 
 </widget>

@@ -70,6 +70,7 @@ function main() {
             shades: require('./data/shades.json'),
             colors: require('./data/colors.json'),
             markers: require('./data/markers.json'),
+            featuredTourList: require('./data/featured_tours.json'),
 
             searchResults: [],
             selectedCategories: [],
@@ -85,7 +86,8 @@ function main() {
             context: {},
             detailLocationData: {},
             selectedLocationId: null,
-            selectedLocation: null
+            selectedLocation: null,
+            selectedFeaturedTour: null
         },
 
         ready: function() {
@@ -113,19 +115,13 @@ function main() {
                 }
             );
 
-
-
-
-
             window.router.init("/" + this.currentScreen);
-            setTimeout(function() {
-                queries.findFeaturedLocations(function(err, places) {
-                    //console.log(places);
-                    app.featuredLocations = places;
-                });
-            }, 1000);
-
-
+            // setTimeout(function() {
+            //     queries.findFeaturedLocations(function(err, places) {
+            //         //console.log(places);
+            //         app.featuredLocations = places;
+            //     });
+            // }, 1000);
         },
 
         methods: {

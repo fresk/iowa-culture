@@ -36,6 +36,10 @@ Vue.component('map', {
                 app.currentScreen = "tour-list";
                 return;
             }
+            if (app.mapMode == 'featured') {
+                app.currentScreen = "featured";
+                return;
+            }
             app.currentScreen = "location-list";
         }
     }
@@ -60,7 +64,7 @@ function initMap(el) {
     });
     //fit to iowa bounds by default;
     //map.setMaxBounds(L.latLngBounds([35, -96], [47, -87]));
-    map.setMaxBounds(L.latLngBounds([38.145, -96.965], [45.95, -89.934]));
+    map.setMaxBounds(L.latLngBounds([37.145 - 2, -96.965 - 2], [45.95 + 2, -89.934 + 2]));
     map.fitBounds(L.latLngBounds([38.145, -96.965], [45.95, -89.934]));
     map.restoreView();
 
@@ -76,6 +80,11 @@ function initMap(el) {
     // in tour mode, we only ever want to show the places in the tour
     if (app.mapMode == "tour") {
         utils.populateMap(app.tourContext.places);
+    }
+
+    if (app.mapMode == "featured") {
+        utils.populateMap(app.featuredLocations);
+        fitMapToMarkers();
     }
 
     // start out by showing all the search results in explore mode
