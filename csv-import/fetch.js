@@ -82,7 +82,7 @@ var es_index_mapping = {
                             "type": "boolean"
                         },
                         "featured": {
-                            "type": "boolean"
+                            "type": "string"
                         },
                         "featured_text": {
                             "type": "string"
@@ -147,7 +147,7 @@ function toGeoJson(d) {
             "instagram": d.instagram,
             "public": d.public == "TRUE",
             "hide": d.hide != "FALSE",
-            "featured": d.featured == "TRUE",
+            "featured": d.featured != "FALSE" ? d.featured : "",
             "featured_text": d.featuredtext,
             "featured_tour": d.featuredtour,
             "description": d.description,

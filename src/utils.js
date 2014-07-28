@@ -5,6 +5,10 @@ var urlencode = require('urlencode');
 
 
 
+exports.makePlain = function(d) {
+    return JSON.parse(JSON.stringify(d));
+};
+
 
 exports.populateMap = function(places) {
 
@@ -89,9 +93,17 @@ exports.assignCategoryAssets = function(p) {
             break;
         }
     }
+
+    if (p.properties.categories.length === 0){
+        p.properties.icon = false;
+        return;
+    }
+
+    cat = p.properties.categories[0];
+
     console.log("featured", typeof(p.properties.featured), p.properties.featured);
     console.log("public", typeof(p.properties.public), p.properties.public);
-    if (p.properties.featured === true) {
+    if (p.properties.featured) {
         p.properties._category = "featured";
         cat = "featured";
     }

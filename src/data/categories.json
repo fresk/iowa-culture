@@ -1,62 +1,69 @@
 {
     "displayNames": {
-        "art_museum"                 : "Art Museums",
-        "art_commercial"             : "Commerical Art",
-        "monument_memorial"          : "Monuments and Memorials",
-        "art_performing"             : "Performing Arts Centers",
-        "art_public"                 : "Public Art",
-        "post_office_murals"         : "Post Office Murals",
+        "art_museum": "Art Museums",
+        "art_commercial": "Commerical Art",
+        "monument_memorial": "Monuments and Memorials",
+        "art_performing": "Performing Arts Centers",
+        "art_public": "Public Art",
+        "post_office_murals": "Post Office Murals",
+        "art_studio": "Art Studios",
 
-        "barn"                       : "Barns",
-        "country_school"             : "Country Schools",
-        "historic_ballrooms"         : "Historic Ballrooms",
-        "historic_district"          : "Historic Districts",
-        "historic_hotel"             : "Historic Hotels",
-        "history_museum"             : "History Museums",
-        "historic_site"              : "Historic Sites",
-        "historic_marker"            : "Historic Marker",
-        "heritage_area"              : "National Heritage Areas",
-        "state_historic_site"        : "State Historic Sites",
-        "tvmovie_site"               : "Television and Movie Sites",
-        "theater"                    : "Historic Theaters",
-        "national_historic_landmark" : "National Historic Landmarks",
-        "national_historic_register" : "National Register of Historic Places",
-        "historic_unique"            : "Uniquely Iowa",
-        "notable_iowan"              : "Notable Iowans",
-        "gov_gravesite"              : "Iowa Governor Gravesites",
+        "barn": "Historic Barns and Farmsteads",
+        "bridge": "Historic Bridges",
+        "historic_unique": "Uniquely Iowa",
+        "country_school": "Country Schools",
+        "historic_ballrooms": "Historic Ballrooms",
+        "historic_district": "Historic Districts",
+        "historic_hotel": "Historic Hotels",
+        "history_museum": "History Museums",
+        "historic_site": "Historic Sites",
+        "historic_marker": "Historic Marker",
+        "heritage_area": "National Heritage Areas",
+        "state_historic_site": "State Historic Sites",
+        "tvmovie_site": "Television and Movie Sites",
+        "theater": "Historic Theaters",
+        "national_historic_landmark": "National Historic Landmarks",
+        "national_historic_register": "National Register of Historic Places",
+        "historic_unique": "Uniquely Iowa",
+        "notable_iowan": "Notable Iowans",
+        "gov_gravesite": "Iowa Governor Gravesites",
+        "lost"         : "Lost Historic Sites",
 
-        "botany"                     : "Gardens and Nature Centers",
-        "science"                    : "Science Centers",
-        "zoo"                        : "Zoos and Wildlife"
+        "botany": "Gardens and Nature Centers",
+        "science": "Science Centers",
+        "zoo": "Zoos and Wildlife"
 
     },
 
     "art": [
-        "art_museum",         
-        "art_commercial",     
-        "monument_memorial",  
-        "art_performing",     
-        "art_public",         
-        "post_office_murals"
+        "art_museum",
+        "art_commercial",
+        "monument_memorial",
+        "art_performing",
+        "art_public",
+        "post_office_murals",
+        "art_studio"
     ],
     "history": [
-        "barn",                      
-        "country_school",            
-        "historic_ballrooms",       
-        "historic_district",         
-        "historic_hotel",           
-        "history_museum",           
-        "historic_site",           
-        "historic_marker",          
-        "heritage_area",           
-        "state_historic_site",      
-        "tvmovie_site",        
-        "theater",         
+        "barn",
+        "bridge",
+        "lost",
+        "country_school",
+        "historic_ballrooms",
+        "historic_district",
+        "historic_hotel",
+        "history_museum",
+        "historic_site",
+        "historic_marker",
+        "heritage_area",
+        "state_historic_site",
+        "tvmovie_site",
+        "theater",
         "national_historic_landmark",
         "national_historic_register",
         "historic_unique",
-        "notable_iowan",     
-        "gov_gravesite"     
+        "notable_iowan",
+        "gov_gravesite"
     ],
     "science": [
         "botany",
@@ -64,7 +71,3 @@
         "zoo"
     ]
 }
-
-
-
-

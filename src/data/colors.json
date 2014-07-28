@@ -9,7 +9,7 @@
         "cyan": "#52B8C2",
         "purple": "#91637F",
         "blue": "#3A4050",
-        "gray": "#4D4D4F",
+        "gray": "#4D4D4F"
     },
 
 
@@ -26,8 +26,13 @@
     "art_performing"             : "#52B8C2",
     "art_public"                 : "#52B8C2",
     "post_office_murals"         : "#52B8C2",
+    "art_studio"                 : "#52B8C2",
+
+    "historic_unique"            : "#a1ca6b",
 
     "barn"                       : "#B65556",
+    "bridge"                     : "#B65556",
+    "lost"                       : "#B65556",
     "country_school"             : "#B65556",
     "historic_ballrooms"         : "#B65556",
     "historic_district"          : "#B65556",
@@ -41,7 +46,7 @@
     "theater"                    : "#B65556",
     "national_historic_landmark" : "#B65556",
     "national_historic_register" : "#B65556",
-    "historic_unique"            : "#B65556",
+
     "notable_iowan"              : "#B65556",
     "gov_gravesite"              : "#B65556",
 

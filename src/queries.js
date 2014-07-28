@@ -15,9 +15,12 @@ exports.findFeaturedLocations = function(cb) {
     var search = {
         "size": 50,
         "filter": {
-            "term": {
-                "properties.featured": true
-            }
+            "exists": {
+                "field": "properties.featured"
+            },
+            // "term": {
+            //     "properties.featured": true
+            // }
         }
     };
 
@@ -31,7 +34,7 @@ exports.findFeaturedTour = function(slug, cb) {
         "size": 100,
         "filter": {
             "term": {
-                "properties.featured_tour": slug
+                "properties.featured": slug
             }
         }
     };
@@ -203,6 +206,8 @@ exports.textSearch = function(q, cb) {
 
 function searchLocations(search, cb) {
 
+
+
     if (window.app.selectedCategories.length > 0) {
         // console.log("limiting categories", app.selectedCategories);
         search.filter.bool.must.push({
@@ -212,7 +217,7 @@ function searchLocations(search, cb) {
         });
     }
 
-
+    console.log("search", search);
     request.post("http://iowaculture.fresk.io:9200/dca/location/_search", search, function(err, resp) {
         console.log(err, resp);
         processResponse(resp, cb);

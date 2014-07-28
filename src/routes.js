@@ -2,8 +2,13 @@ var _ = require('lodash');
 var sanitize = require('sanitize-caja');
 var request = require("superagent");
 var queries = require('./queries');
+var utils = require('./utils');
 var $ = require('jquery');
 
+
+function dump(obj) {
+    console.log(JSON.parse(JSON.stringify(obj)));
+}
 
 module.exports = {
 
@@ -160,9 +165,12 @@ module.exports = {
         // console.log("FEATURED");
         //app.searchResults = app.featuredLocations;
         app.selectedFeaturedTour = _.find(app.featuredTourList, function(t) {
+            console.log("tour", utils.makePlain(t));
+
             return t.slug == slug;
         });
         queries.findFeaturedTour(slug, function(err, places) {
+            console.log("fetured places", utils.makePlain(places))
             app.featuredLocations = places;
             app.activeTab = 'featured';
             app.currentScreen = 'featured-tour';
