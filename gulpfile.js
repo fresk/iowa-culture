@@ -12,7 +12,6 @@ var imagemin = require('gulp-imagemin');
 var rename = require('gulp-rename');
 var gulpif = require('gulp-if');
 var clean = require('gulp-clean');
-var cache = require('gulp-cache');
 var notify = require('gulp-notify');
 var connect = require('gulp-connect');
 var watch = require('gulp-watch');
@@ -57,7 +56,7 @@ gulp.task('browserify', function() {
         .on('error', handleErrors)
         .pipe(source('bundle.js'))
         .pipe(gulpif(env === 'production', uglify()))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('dist/'));
 });
 
 
@@ -78,7 +77,7 @@ gulp.task('styles', function() {
         .on('error', handleErrors)
         .pipe(minifycss(minify_options))
         .pipe(rename('index.css'))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('dist/'));
 });
 
 
@@ -103,12 +102,12 @@ gulp.task('fonts', function() {
 
 gulp.task('images', function() {
     return gulp.src('src/img/**/*')
-    //.pipe(cache(imagemin({ 
-    //optimizationLevel: 3, 
-    //progressive: true, 
-    //interlaced: true 
-    //}))).on('error', handleErrors)
-    .pipe(gulp.dest('dist/img'))
+        //.pipe(cache(imagemin({
+        //optimizationLevel: 3,
+        //progressive: true,
+        //interlaced: true
+        //}))).on('error', handleErrors)
+        .pipe(gulp.dest('dist/img'));
 });
 
 
@@ -131,8 +130,8 @@ gulp.task('reload', function() {
 // clean
 gulp.task('clean', function() {
     return gulp.src(['dist/**/*'], {
-        read: false
-    })
+            read: false
+        })
         .pipe(clean());
 });
 

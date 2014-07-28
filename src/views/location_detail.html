@@ -42,21 +42,22 @@
                     {{context.address1}}<br/>
                     <span v-if="context.address2">{{context.address2}}<br/></span>
                     {{context.city}}, {{context.state}} {{context.zip}}<br/>
-                    <i>{{context.county}</i>
+                    {{context.county}} County
                 </address>
             </div>
         </a>
 
-
-            <div v-if="context.phone" class="phone-box" v-on="click: callPhone()">
+            <a href="tel:{{context.phone}}" target="_system">
+            <div v-if="context.phone" class="phone-box" >
                 <img src="img/phone.png">
                 <p> {{context.phone}} </p>
             </div>
+            </a>
 
-            <div v-if="context.website" class="phone-box web-box" v-on="click: openWebsite()">
+            <a href="http://{{context.website}}" target="_system">
+            <div v-if="context.website" class="phone-box web-box">
                 <img src="img/web.png">
                 <p> Website </p>
-
             </div>
 
             <div class="social-icons">

@@ -50,6 +50,33 @@ Vue.component('map', {
 
 
 
+
+function getUserLatLng(cb) {
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            var pos = L.latLng(
+                position.coords.latitude,
+                position.coords.longitude
+            );
+            cb(null, pos);
+        },
+        function onError(error) {
+            cb(error);
+            alert('code: ' + error.code + '\nmessage: ' + error.message + '\n');
+        }
+    );
+
+}
+
+function showNearbyMarkers(err, latlng) {
+    queries.loadNearByMarkers(latlng, function(err, places) {
+        app.searchResults = _.sortBy(places, function(place) {
+            return place._distance;
+        });
+        fitMapToMarkers();
+    });
+}
+
 function initMap(el) {
 
     window.map = L.mapbox.map(el, 'hansent.i7jbkp90', {
@@ -99,14 +126,7 @@ function initMap(el) {
     }
 
     if (app.mapMode == 'nearme') {
-        queries.loadNearByMarkers(app.userLatLng, function(err, places) {
-            console.log("NEARME", places);
-            app.searchResults = _.sortBy(places, function(place) {
-                return place._distance;
-            });
-            fitMapToMarkers();
-        });
-
+        getUserLatLng(showNearbyMarkers);
     }
 
     if (app.userLatLng)

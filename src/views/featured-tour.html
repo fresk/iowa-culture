@@ -36,7 +36,7 @@
                     {{properties.title}}
                 </a>
                 <div class="table-cell-plus-icon" v-on="click: addToTour($event)"></div>
-                <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
+                <img class="table-cell-marker" v-attr="src: properties.icon.iconUrl">
                 <div class="distance-text">{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
             </li>
 

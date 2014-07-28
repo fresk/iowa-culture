@@ -93,6 +93,10 @@ exports.findLocationsWithCategoryAndNearby = function(categories, latlng, cb) {
 
 
 exports.loadNearByMarkers = function(latlng, cb) {
+    if (latlng === undefined) {
+        cb("error");
+    }
+
     var search = {
         "from": 0,
         "size": 20,
@@ -120,7 +124,7 @@ exports.loadNearByMarkers = function(latlng, cb) {
 exports.loadMarkersInBounds = function(bounds, cb) {
     // console.log("refresh search", app.selectedCategories);
     var search = {
-        "size": 100,
+        "size": 50,
         "filter": {
             "bool": {
                 "must": [{

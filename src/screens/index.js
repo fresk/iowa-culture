@@ -1,10 +1,10 @@
 var Vue = require('vue');
-// var _ = require('lodash');
-// var request = require("superagent");
+var _ = require('lodash');
+var request = require("superagent");
 // var es = require("elasticsearch");
 var $ = require('jquery');
 var queries = require('../queries');
-// var uuid = require('uuid');
+var uuid = require('uuid');
 // var utils = require('./utils');
 require('./explore');
 require('./featured');
@@ -126,7 +126,7 @@ Vue.component('suggest-a-place', {
                 submitter_name: $("#input-submitter").val(),
             };
 
-            request.post('http://iowaculture.fresk.io:8080/app/suggest')
+            request.post('http://iowaculture.fresk.io:80/app/suggest')
                 .send(data)
                 .end(function(error, res) {});
 

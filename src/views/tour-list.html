@@ -4,7 +4,7 @@
         <a href="#/back" class="icon icon-left-nav pull-left back-button"></a>
         <a href="#/search" class="icon icon-search pull-right back-button"></a>
         <a href="#/home" class="header-logo"></a>
-    </header>     
+    </header>
 
     <nav class="bar bar-tab">
       <div class="toggle-list2map" v-on="click: showInMapView()"></div>
@@ -29,15 +29,15 @@
 
 
 
-            <li v-repeat="tourContext.places" class="table-view-cell tour-item-cell" 
+            <li v-repeat="tourContext.places" class="table-view-cell tour-item-cell"
                 v-on="click: showDetailView(properties._id, $event)"
                 v-transition>
-                {{properties.title}} 
-                <img class="table-cell-marker" src="{{properties.icon.iconUrl}}">
+                {{properties.title}}
+                <img class="table-cell-marker" v-attr="src: properties.icon.iconUrl"">
                 <div v-show="editMode == false" class="distance-text" v-transition>{{ (_distance * 0.000621371).toFixed(1)}}mi</div>
-                
-                <div v-show="editMode == true" 
-                    v-on="click: deleteFromTour(this.$data, $event)" 
+
+                <div v-show="editMode == true"
+                    v-on="click: deleteFromTour(this.$data, $event)"
                     class="tour-item-remove-btn" v-transition></div>
             </li>
         </ul>
